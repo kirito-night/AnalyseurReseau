@@ -1,4 +1,4 @@
-package Tools;
+package pobj.tools;
 
 public class Tools {
 	public static int convertHextoDec(String hex) {
@@ -27,7 +27,7 @@ public class Tools {
 	}
 	
 	public static void main(String[] args){
-		System.out.println(convertHextoDec("f"));
+		System.out.println(convertHextoDec("F"));
 		System.out.println(convertHextoBin("ff"));
 		System.out.println(convertBintoDec("11111111"));
 	}
