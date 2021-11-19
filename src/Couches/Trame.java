@@ -1,7 +1,7 @@
 package Couches;
 import java.util.*;
-
-//import static org.junit.Assert.*;
+import javafx.base.*;
+import static org.junit.Assert.*;
 public class Trame {
 	private Integer numTrame;
 	private List<String> trame;

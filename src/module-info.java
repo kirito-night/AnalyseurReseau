@@ -1,3 +1,0 @@
-module analyseurReseau {
-	requires junit;
-}
