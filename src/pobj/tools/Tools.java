@@ -26,6 +26,8 @@ public class Tools {
 		return convertDectoHex(convertBintoDec(bin));
 	}
 	
+	
+	
 	public static void main(String[] args){
 		System.out.println(convertHextoDec("F"));
 		System.out.println(convertHextoBin("ff"));
