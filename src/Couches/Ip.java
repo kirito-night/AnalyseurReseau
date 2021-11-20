@@ -6,16 +6,25 @@ import java.util.List;
 import pobj.tools.Tools;
 
 public class Ip implements ICouches {
+
+	/**
+	 * Version est la version du IP
+	 * ihl est le Header Length
+	 * tos est le Type of service
+	 * totalLength est le longueur total du IP (nombre de bits)
+	 * 
+	 */
+	
 	private String version;
-	private String ihl;
-	private String tos;
+	private String ihl;         
+	private String tos;         
 	private String totalLength;
 	private String identifer;
 	private String r;
 	private String df;
 	private String mf;
 	private String fragmentOffset;
-	private String ttl;
+	private String ttl;        //Time tio live
 	private String protocol;
 	private String headerChecksum;
 	private String srcIpAdress;
@@ -87,6 +96,27 @@ public class Ip implements ICouches {
 		}
 	}
 	
-	
+	public String analyse() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
+		sb.append(version + "\n\tHearder Length : ");
+		sb.append(ihl + "\n\tTotal Length : ");
+		sb.append(totalLength + "\n\tIdentification : ");
+		sb.append(identifer + "\n\tFlags : ");
+		
+		if(df=="1") {
+			sb.append("Don't fragment\n\t");
+		}
+		if(mf=="1") {
+			sb.append("More fragment\n\t");
+		}
+		sb.append(fragmentOffset + "\n\tTime to live : ");
+		sb.append(ttl+"\n\tProtocol : ");
+		if(Tools.convertHextoDec(protocol)="6") {
+			sb.append("TCP (6)");
+		}
+		
+		sb.append()
+	}
 	
 }
