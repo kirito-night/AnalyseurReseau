@@ -1,5 +1,7 @@
 package Couches;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +22,13 @@ public class Ip implements ICouches {
 	private String tos;         
 	private String totalLength;
 	private String identifer;
+	private String flags;
 	private String r;
 	private String df;
 	private String mf;
 	private String fragmentOffset;
-	private String ttl;        //Time tio live
+	private String ttl;        //Time to live
+
 	private String protocol;
 	private String headerChecksum;
 	private String srcIpAdress;
@@ -40,7 +44,7 @@ public class Ip implements ICouches {
 	
 	public Ip(List<String> trame) {
 		
-		
+		getchamp(trame);
 	}
 	public void getchamp(List<String> trame) {
 		String tmp = trame.get(0);
@@ -48,10 +52,13 @@ public class Ip implements ICouches {
 		ihl = tmp.substring(1, 2);
 		if(Tools.convertHextoDec(ihl) == 5) {
 			enteteIP = trame.subList(0, 20);
+			data = trame.subList(20, trame.size());
 			partieFixe();
+			
 		}
 		if(Tools.convertHextoDec(tmp) == 15) {
 			enteteIP = trame.subList(0, 60);
+			data = trame.subList(60, trame.size());
 			partieFixe();
 			optionIP();
 		}
@@ -63,8 +70,8 @@ public class Ip implements ICouches {
 		tos = enteteIP.get(i++);
 		this.totalLength = enteteIP.get(i++) + enteteIP.get(i++);
 		this.identifer = enteteIP.get(i++) + enteteIP.get(i++);
-		String tmp = enteteIP.get(i++) + enteteIP.get(i++);
-		String binTmp = Tools.convertHextoBin(tmp); 
+		flags= enteteIP.get(i++) + enteteIP.get(i++);
+		String binTmp = Tools.convertHextoBin(flags); 
 		fragmentOffset = binTmp.substring(3);
 		this.r = binTmp.substring(0, 1);
 		this.df= binTmp.substring(1, 2);
@@ -74,6 +81,8 @@ public class Ip implements ICouches {
 		this.headerChecksum  = enteteIP.get(i++) + enteteIP.get(i++);
 		this.srcIpAdress = Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++)) ;
 		this.destIpAdress =  Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++)) ;
+		
+		assertEquals(i, 20);
 		
 		
 		
@@ -94,6 +103,7 @@ public class Ip implements ICouches {
 		for(; i< 60 ; i++) {
 			padding = padding +" "+ enteteIP.get(i);
 		}
+		assertEquals(i, 60);
 	}
 	
 	public String getProtocol() {
@@ -110,13 +120,20 @@ public class Ip implements ICouches {
 		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : ");
 		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : ");
 		
+		sb.append(flags + "\n\t\t : ");
 		if(df=="1") {
-			sb.append("Don't fragment\n\t");
+			sb.append("Don't fragment\n\t\t");
+		}
+		if(df=="0") {
+			sb.append("Could fragment\n\t\t");
+		}
+		if(mf=="1") {
+			sb.append("No More fragment\n\t");
 		}
 		if(mf=="1") {
 			sb.append("More fragment\n\t");
 		}
-		sb.append(fragmentOffset + "\n\tTime to live : ");
+		sb.append("Fragment Offset :"+fragmentOffset + "\n\tTime to live : ");
 		sb.append(Tools.convertHextoDec(ttl)+"\n\tProtocol : ");
 		if(Tools.convertHextoDec(protocol)==1) {
 			sb.append("ICMP (1)\n\tHeader checksum : ");
@@ -127,11 +144,18 @@ public class Ip implements ICouches {
 		if(Tools.convertHextoDec(protocol)==17) {
 			sb.append("UDP (17)\n\tHeader checksum : ");
 		}
-		sb.append(headerChecksum+"\n\tSource : ");
+		sb.append(headerChecksum+   " ("+ Tools.convertHextoDec(headerChecksum)+")" + "\n\tSource : ");
 		sb.append(srcIpAdress+"\n\tDestination : ");
 		sb.append(destIpAdress+"\n\tPadding : ");
 		sb.append(padding);
 		return sb.toString();
 	}
 	
+	
+	public List<String> getData() {
+		return data;
+	}
+	public void setData(List<String> data) {
+		this.data = data;
+	}
 }

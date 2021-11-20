@@ -1,0 +1,18 @@
+Ethernet II : 
+	Destination : 90:61:ae:7c:c9:96
+	Source : b8:66:85:9a:b1:0c
+	Type : IPv4 (0800)
+
+Internet Protocol Version 4 : 
+	Version : 4
+	Hearder Length : 5
+	Total Length : 52
+	Identification : 036a (874)
+	Flags : 4000
+		 : Fragment Offset :000000000000
+	Time to live : 57
+	Protocol : TCP (6)
+	Header checksum : e9a5 (59813)
+	Source : 35.232.111.17
+	Destination : 192.168.1.19
+	Padding : null

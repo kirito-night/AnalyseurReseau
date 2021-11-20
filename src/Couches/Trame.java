@@ -81,6 +81,22 @@ public class Trame {
 			Ip  ip = (Ip) analyseIP(e.getData());
 			couches.add(ip);
 			String proto = ip.getProtocol();
+			switch(Tools.convertHextoDec(proto)) {
+				case 17 :
+					//UDP
+					break;
+				case 1 :
+					//ICMP
+					break;
+				case 6 :
+					//TCP
+					break;
+			}
+		}
+		
+		
+		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0806")) {
+			//analyse ARP non obligatoire 
 		}
 		
 		
