@@ -99,4 +99,9 @@ public class Ethernet implements ICouches{
 	
 	
 	
+	public String analyse() {
+		StringBuilder sb = new StringBuilder();
+		
+	}
+	
 }

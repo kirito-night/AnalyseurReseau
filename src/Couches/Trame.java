@@ -1,6 +1,5 @@
 package Couches;
 import java.util.*;
-import javafx.base.*;
 import static org.junit.Assert.*;
 public class Trame {
 	private Integer numTrame;
@@ -42,5 +41,8 @@ public class Trame {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		
+		Ip ip = new Ip(trame);
+		return ip;
 	}
 }
