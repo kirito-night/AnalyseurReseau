@@ -107,8 +107,8 @@ public class Ip implements ICouches {
 		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
 		sb.append(version + "\n\tHearder Length : ");
 		sb.append(ihl + "\n\tTotal Length : ");
-		sb.append(totalLength + "\n\tIdentification : ");
-		sb.append(identifer + "\n\tFlags : ");
+		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : ");
+		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : ");
 		
 		if(df=="1") {
 			sb.append("Don't fragment\n\t");
@@ -117,12 +117,21 @@ public class Ip implements ICouches {
 			sb.append("More fragment\n\t");
 		}
 		sb.append(fragmentOffset + "\n\tTime to live : ");
-		sb.append(ttl+"\n\tProtocol : ");
-		if(Tools.convertHextoDec(protocol)="6") {
-			sb.append("TCP (6)");
+		sb.append(Tools.convertHextoDec(ttl)+"\n\tProtocol : ");
+		if(Tools.convertHextoDec(protocol)==1) {
+			sb.append("ICMP (1)\n\tHeader checksum : ");
 		}
-		
-		sb.append()
+		if(Tools.convertHextoDec(protocol)==6) {
+			sb.append("TCP (6)\n\tHeader checksum : ");
+		}
+		if(Tools.convertHextoDec(protocol)==17) {
+			sb.append("UDP (17)\n\tHeader checksum : ");
+		}
+		sb.append(headerChecksum+"\n\tSource : ");
+		sb.append(srcIpAdress+"\n\tDestination : ");
+		sb.append(destIpAdress+"\n\tPadding : ");
+		sb.append(padding);
+		return sb.toString();
 	}
 	
 }
