@@ -101,7 +101,12 @@ public class Ethernet implements ICouches{
 	
 	public String analyse() {
 		StringBuilder sb = new StringBuilder();
-		
+		sb.append("Ethernet II : \n\tDestination :");
+		sb.append(destMac + "\n\tSource :");
+		sb.append(srcMac + "\n\tType :");
+		sb.append(type + "\n\t");
+		return sb.toString();
+
 	}
 	
 }
