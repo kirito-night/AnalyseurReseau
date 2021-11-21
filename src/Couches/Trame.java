@@ -103,7 +103,7 @@ public class Trame {
 					//TCP
 					break;
 				default: 
-					throw new Exception("uanble to analyse protocol");
+					throw new Exception("unable to analyse protocol");
 			}
 			
 		}
