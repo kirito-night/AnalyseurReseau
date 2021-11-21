@@ -117,26 +117,33 @@ public class Ip implements ICouches {
 		if(enteteIP.size() == 60) {
 			sb.append("type option : ");
 				switch(Tools.convertHextoDec(optionType)) {
-					case 0:
+					case 0:sb.append("End of Options List\n");
 						//End of list
 						break;
-					case 1:
+					case 1:sb.append("No Operation\n\t");
 						//no operation 
 						break;
-					case 7 : 
+					case 7 : sb.append("Recourd Route\n\t");
 						//recourd route
 						break;
-					case 68 :
-						
+					case 68 :sb.append("Time Stamp\n\t");
+						//Time Stamp
 						break;
-					case 131 :
-						
+					case 131 :sb.append("Loose Routing\n\t");
+						//Loose Routing
 						break;
-					case 137 :
+					case 137 :sb.append("Strict Routing\n\t");
+						//Strict Routing
 						break;
 					default:
 						sb.append("unable to analyse option type");
 				}
+				sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
+				sb.append("Option Pointeur : "+optionPointer+"\n\t");
+				for(String s:listeIPpasser) {
+					sb.append("\t"+s+"\t");
+				}
+				sb.append("/n/tPadding : "+padding+"/n");
 			
 		}
 		return sb.toString();
@@ -146,8 +153,8 @@ public class Ip implements ICouches {
 		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
 		sb.append(version + "\n\tHearder Length : ");
 		sb.append(ihl + "\n\tTotal Length : ");
-		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : ");
-		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : ");
+		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : 0x");
+		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : 0x");
 		
 		sb.append(flags + "\n\t\t");
 		if(Tools.convertHextoDec(df)==1) {
@@ -165,13 +172,13 @@ public class Ip implements ICouches {
 		sb.append("Fragment Offset :"+fragmentOffset + "\n\tTime to live : ");
 		sb.append(Tools.convertHextoDec(ttl)+"\n\tProtocol : ");
 		if(Tools.convertHextoDec(protocol)==1) {
-			sb.append("ICMP (1)\n\tHeader checksum : ");
+			sb.append("ICMP (1)\n\tHeader checksum : 0x");
 		}
 		if(Tools.convertHextoDec(protocol)==6) {
-			sb.append("TCP (6)\n\tHeader checksum : ");
+			sb.append("TCP (6)\n\tHeader checksum : 0x");
 		}
 		if(Tools.convertHextoDec(protocol)==17) {
-			sb.append("UDP (17)\n\tHeader checksum : ");
+			sb.append("UDP (17)\n\tHeader checksum : 0x");
 		}
 		sb.append(headerChecksum+   " ("+ Tools.convertHextoDec(headerChecksum)+")" + "\n\tSource : ");
 		sb.append(srcIpAdress+"\n\tDestination : ");
