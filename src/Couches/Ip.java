@@ -152,8 +152,9 @@ public class Ip implements ICouches {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
 		sb.append(version + "\n\tHearder Length : ");
-		sb.append(ihl + "\n\tTotal Length : ");
-		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : 0x");
+		sb.append(ihl + "\n\tType of service : 0x");
+		sb.append(tos+"\n\t");
+		sb.append("Total Length : "+Tools.convertHextoDec(totalLength) + "\n\tIdentification : 0x");
 		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : 0x");
 		
 		sb.append(flags + "\n\t\t");
