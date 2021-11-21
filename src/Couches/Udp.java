@@ -2,6 +2,8 @@ package Couches;
 
 import java.util.List;
 
+import pobj.tools.Tools;
+
 public class Udp implements ICouches{
 	private String srcPort;
 	private String destPort;
@@ -78,8 +80,13 @@ public class Udp implements ICouches{
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub
-		
-		return null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("User Datagram Protocol : \n\t");
+		sb.append("Source Port : "+Tools.convertHextoDec(srcPort)+"\n\t");
+		sb.append("Destination Port : "+Tools.convertHextoDec(destPort)+"\n\t");
+		sb.append("Length : "+length +"\n\t");
+		sb.append("Checksum : 0x"+checksum +"\n");
+		return sb.toString();
 	}
 	
 	
