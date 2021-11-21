@@ -74,6 +74,13 @@ public class Trame {
 		return ip;
 	}
 	
+	public ICouches analyseUDP(List<String> trame) {
+		Udp udp = new Udp(trame);
+		return udp;
+	}
+	
+	
+	
 	public String  analyseCouche() throws Exception {
 		Ethernet e  =  (Ethernet)analyseEthernet(this.trame);
 		couches.add(e);
@@ -84,7 +91,8 @@ public class Trame {
 			switch(Tools.convertHextoDec(proto)) {
 				case 17 :
 					//UDP
-					
+					Udp udp = (Udp) analyseUDP(ip.getData());
+					couches.add(udp);
 					
 					break;
 				case 1 :
@@ -96,6 +104,7 @@ public class Trame {
 				default: 
 					throw new Exception("unable analysed protocol");
 			}
+			
 		}
 		
 		
@@ -105,7 +114,7 @@ public class Trame {
 		
 		
 		
-		return null;
+		return "test";
 	}
 	
 	public String[] resultattAnalyse() {

@@ -7,7 +7,7 @@ import pobj.lecture.FileReader;
 import pobj.output.Output;
 public class TestTrame {
 	public static void main(String[] argrs) {
-		FileReader f1 = new FileReader("data/data3.txt");
+		FileReader f1 = new FileReader("data/data4.txt");
 		
 		List<Trame> listTrame = Trame.generateListTrame(f1.getMapTrames());
 		
@@ -17,11 +17,11 @@ public class TestTrame {
 		
 			
 			String [] result = t.resultattAnalyse();
-			/*for(String s : result) {
+			for(String s : result) {
 				System.out.println(s);
-			}*/
-			File file = new File("data/output.txt");
-			Output.output(result, file);
+			}
+			//File file = new File("data/output.txt");
+			//Output.output(result, file);
 		
 		}
 	}
