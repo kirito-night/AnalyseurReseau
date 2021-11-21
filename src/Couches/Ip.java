@@ -141,7 +141,7 @@ public class Ip implements ICouches {
 				sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
 				sb.append("Option Pointeur : "+optionPointer+"\n\t");
 				for(String s:listeIPpasser) {
-					sb.append("\t"+s+"\t");
+					sb.append("\t"+s+"\n\t");
 				}
 				sb.append("/n/tPadding : "+padding+"/n");
 			
