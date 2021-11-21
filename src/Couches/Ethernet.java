@@ -107,10 +107,10 @@ public class Ethernet implements ICouches{
 		sb.append(destMac + "\n\tSource : ");
 		sb.append(srcMac + "\n\tType : ");
 		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0800")) {
-			sb.append("IPv4 "+"("+type+")"+ "\n");
+			sb.append("IPv4 "+"(0x"+type+")"+ "\n");
 		}
 		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0806")) {
-			sb.append("ARP "+"("+type+")"+ "\n");
+			sb.append("ARP "+"(0x"+type+")"+ "\n");
 		}
 	
 		return sb.toString();
