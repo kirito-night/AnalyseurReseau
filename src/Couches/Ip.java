@@ -113,6 +113,35 @@ public class Ip implements ICouches {
 		this.protocol = protocol;
 	}
 	public String analyse() {
+		StringBuilder sb = analysePartieFixe();
+		if(enteteIP.size() == 60) {
+			sb.append("type option : ");
+				switch(Tools.convertHextoDec(optionType)) {
+					case 0:
+						//End of list
+						break;
+					case 1:
+						//no operation 
+						break;
+					case 7 : 
+						//recourd route
+						break;
+					case 68 :
+						
+						break;
+					case 131 :
+						
+						break;
+					case 137 :
+						break;
+					default:
+						sb.append("unable to analyse option type");
+				}
+			
+		}
+		return sb.toString();
+	}
+	private StringBuilder analysePartieFixe() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
 		sb.append(version + "\n\tHearder Length : ");
@@ -120,18 +149,18 @@ public class Ip implements ICouches {
 		sb.append(Tools.convertHextoDec(totalLength) + "\n\tIdentification : ");
 		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : ");
 		
-		sb.append(flags + "\n\t\t : ");
-		if(df=="1") {
-			sb.append("Don't fragment\n\t\t");
+		sb.append(flags + "\n\t\t");
+		if(Tools.convertHextoDec(df)==1) {
+			sb.append("df :"+df+" Don't fragment\n\t\t");
 		}
-		if(df=="0") {
-			sb.append("Could fragment\n\t\t");
+		if(Tools.convertHextoDec(df)==0) {
+			sb.append("df :"+df+" Could fragment\n\t\t");
 		}
-		if(mf=="1") {
-			sb.append("No More fragment\n\t");
+		if(Tools.convertHextoDec(mf)==1) {
+			sb.append("mf :"+mf+" No More fragment\n\t");
 		}
-		if(mf=="1") {
-			sb.append("More fragment\n\t");
+		if(Tools.convertHextoDec(mf) ==0) {
+			sb.append("mf :"+mf+" More fragment\n\t");
 		}
 		sb.append("Fragment Offset :"+fragmentOffset + "\n\tTime to live : ");
 		sb.append(Tools.convertHextoDec(ttl)+"\n\tProtocol : ");
@@ -146,9 +175,8 @@ public class Ip implements ICouches {
 		}
 		sb.append(headerChecksum+   " ("+ Tools.convertHextoDec(headerChecksum)+")" + "\n\tSource : ");
 		sb.append(srcIpAdress+"\n\tDestination : ");
-		sb.append(destIpAdress+"\n\tPadding : ");
-		sb.append(padding);
-		return sb.toString();
+		sb.append(destIpAdress+"\n\t");
+		return sb;
 	}
 	
 	

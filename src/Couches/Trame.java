@@ -74,7 +74,7 @@ public class Trame {
 		return ip;
 	}
 	
-	public String  analyseCouche() {
+	public String  analyseCouche() throws Exception {
 		Ethernet e  =  (Ethernet)analyseEthernet(this.trame);
 		couches.add(e);
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0800")) {
@@ -84,6 +84,8 @@ public class Trame {
 			switch(Tools.convertHextoDec(proto)) {
 				case 17 :
 					//UDP
+					
+					
 					break;
 				case 1 :
 					//ICMP
@@ -91,6 +93,8 @@ public class Trame {
 				case 6 :
 					//TCP
 					break;
+				default: 
+					throw new Exception("unable analysed protocol");
 			}
 		}
 		

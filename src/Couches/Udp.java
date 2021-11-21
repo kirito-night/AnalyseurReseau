@@ -24,6 +24,56 @@ public class Udp implements ICouches{
 		length = enteteUDP.get(i++) +enteteUDP.get(i++);
 		checksum = enteteUDP.get(i++) +enteteUDP.get(i++);
 	}
+	
+	
+	
+	public String getLength() {
+		return length;
+	}
+
+	public void setLength(String length) {
+		this.length = length;
+	}
+
+	public String getChecksum() {
+		return checksum;
+	}
+
+	public void setChecksum(String checksum) {
+		this.checksum = checksum;
+	}
+
+	public String getSrcPort() {
+		return srcPort;
+	}
+
+	public void setSrcPort(String srcPort) {
+		this.srcPort = srcPort;
+	}
+
+	public String getDestPort() {
+		return destPort;
+	}
+
+	public void setDestPort(String destPort) {
+		this.destPort = destPort;
+	}
+
+	public List<String> getEnteteUDP() {
+		return enteteUDP;
+	}
+
+	public void setEnteteUDP(List<String> enteteUDP) {
+		this.enteteUDP = enteteUDP;
+	}
+
+	public List<String> getData() {
+		return data;
+	}
+
+	public void setData(List<String> data) {
+		this.data = data;
+	}
 
 	@Override
 	public String analyse() {
