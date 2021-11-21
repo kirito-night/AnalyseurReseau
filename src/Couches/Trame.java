@@ -15,13 +15,14 @@ public class Trame {
 		this.trame = trame;
 		
 		couches = new ArrayList<>();
+		//analyseCouche();
 		
 		try {
 			if(analyseCouche() == null) {
 				throw new Exception("format incomprehensible non traite dans notre programme");
 			}
 		}catch (Exception e) {
-			e.getStackTrace();
+			e.getMessage();
 			// TODO: handle exception
 		}
 	}
@@ -81,7 +82,7 @@ public class Trame {
 	
 	
 	
-	public String  analyseCouche() throws Exception {
+	public String  analyseCouche() throws Exception  {
 		Ethernet e  =  (Ethernet)analyseEthernet(this.trame);
 		couches.add(e);
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0800")) {
@@ -102,7 +103,7 @@ public class Trame {
 					//TCP
 					break;
 				default: 
-					throw new Exception("unable analysed protocol");
+					throw new Exception("uanble to analyse protocol");
 			}
 			
 		}
@@ -114,7 +115,7 @@ public class Trame {
 		
 		
 		
-		return "test";
+		return null;
 	}
 	
 	public String[] resultattAnalyse() {

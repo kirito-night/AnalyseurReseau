@@ -84,7 +84,7 @@ public class Udp implements ICouches{
 		sb.append("User Datagram Protocol : \n\t");
 		sb.append("Source Port : "+Tools.convertHextoDec(srcPort)+"\n\t");
 		sb.append("Destination Port : "+Tools.convertHextoDec(destPort)+"\n\t");
-		sb.append("Length : "+length +"\n\t");
+		sb.append("Length : "+Tools.convertHextoDec(length)+"\n\t");
 		sb.append("Checksum : 0x"+checksum +"\n");
 		return sb.toString();
 	}
