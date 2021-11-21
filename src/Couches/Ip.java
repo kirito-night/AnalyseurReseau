@@ -117,22 +117,28 @@ public class Ip implements ICouches {
 		if(enteteIP.size() == 60) {
 			sb.append("type option : ");
 				switch(Tools.convertHextoDec(optionType)) {
-					case 0:sb.append("End of Options List (0)\n");
+					case 0:
+						sb.append("End of Options List (0)\n\t");
 						//End of list
 						break;
-					case 1:sb.append("No Operation (1)\n\t");
+					case 1:
+						sb.append("No Operation (1)\n\t");
 						//no operation 
 						break;
-					case 7 : sb.append("Recourd Route (1)\n\t");
+					case 7 :
+						sb.append("Recourd Route (1)\n\t");
 						//recourd route
 						break;
-					case 68 :sb.append("Time Stamp (68)\n\t");
+					case 68 :
+						sb.append("Time Stamp (68)\n\t");
 						//Time Stamp
 						break;
-					case 131 :sb.append("Loose Routing (131)\n\t");
+					case 131 :
+						sb.append("Loose Routing (131)\n\t");
 						//Loose Routing
 						break;
-					case 137 :sb.append("Strict Routing (137)\n\t");
+					case 137 :
+						sb.append("Strict Routing (137)\n\t");
 						//Strict Routing
 						break;
 					default:
