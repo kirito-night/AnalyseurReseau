@@ -1,5 +1,7 @@
 package Couches;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import pobj.tools.Tools;
@@ -19,10 +21,10 @@ public class Dhcp implements ICouches {
 	private String giaddr; //gateway Ip adress
 	
 	private String chaddr; // client hardware addresses 16 octet
+	private String chaddrPadding;
 	private String serverName ; //serverName 64 octet
 	private String bootFileName; // 128 octet; 
-	private String MagicCookie;  // un octet;
-	private List<String> options; 
+	private List<OptionDHCP> options; 
 	
 	private List<String> enteteDHCP ; 
 	
@@ -46,14 +48,58 @@ public class Dhcp implements ICouches {
 		data =trame.subList(Tools.convertHextoDec(udp.getLength()), trame.size() );
 		
 		int i = 0;
+		opcode = enteteDHCP.get(i++);
+		hardwareType = enteteDHCP.get(i++);
+		hardwareAdressLength = enteteDHCP.get(i++);
+		hops = enteteDHCP.get(i++);
+		xid = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++)+ enteteDHCP.get(i++);
+		sec = enteteDHCP.get(i++) +enteteDHCP.get(i++);
+		flags = enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		ciaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		yiaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		siaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		giaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		chaddr =  enteteDHCP.get(i++) +":" +enteteDHCP.get(i++) +":" + enteteDHCP.get(i++) +":" + enteteDHCP.get(i++)+":" + enteteDHCP.get(i++)+ ":" +enteteDHCP.get(i++) ;
+		chaddrPadding = "";
+		for(; i<10 ; i++) {
+			chaddrPadding += enteteDHCP.get(i);
+		}
+		assertEquals(10, chaddrPadding.length());
+		serverName = enteteDHCP.get(i++);
+		for(; i<63 ; i++) {
+			serverName += " " + enteteDHCP.get(i);
+		}
+		bootFileName = enteteDHCP.get(i++);
 		
+		for(; i<127 ; i++) {
+			bootFileName += " " +enteteDHCP.get(i);
+		}
+		
+		assertEquals(64, serverName.length());
+		
+		while (i< enteteDHCP.size()) {
+			String tag = enteteDHCP.get(i++);
+			if(Tools.convertHextoDec(tag) == 0 || Tools.convertHextoDec(tag) == 255) {
+				OptionDHCP op = new OptionDHCP(tag);
+				options.add(op);
+				
+			}else {
+				String length = enteteDHCP.get(i++);
+				List<String> tmp = enteteDHCP.subList(i, i+ Tools.convertHextoDec(length));
+				OptionDHCP op = new OptionDHCP(tag, length, tmp);
+				options.add(op);
+				i = i+ Tools.convertHextoDec(length);
+				
+			}
+			
+		}
 	}
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		sb.append("Dnymamic Host Configuration : \n\t");
-		sb.append("Messafe type : ");
+		sb.append("Message type : ");
 		if(Tools.convertHextoDec(opcode)==Tools.convertHextoDec("01")) {
 			sb.append("Boot Request (1)\n\t");
 		}

@@ -39,8 +39,37 @@ public class Tools {
 	        hex = hex.replaceAll("D", "1101");
 	        hex = hex.replaceAll("E", "1110");
 	        hex = hex.replaceAll("F", "1111");
+	        hex = hex.replaceAll("a", "1010");
+	        hex = hex.replaceAll("b", "1011");
+	        hex = hex.replaceAll("c", "1100");
+	        hex = hex.replaceAll("d", "1101");
+	        hex = hex.replaceAll("e", "1110");
+	        hex = hex.replaceAll("f", "1111");
+	        
 	        return hex;
 	}
+	
+	
+	public static String hexToASCII(String hex1)
+    {
+        // initialize the ASCII code string as empty.
+		String hex = hex1.replaceAll(" ", "");
+        String ascii = "";
+ 
+        for (int i = 0; i < hex.length(); i += 2) {
+ 
+            // extract two characters from hex string
+            String part = hex.substring(i, i + 2);
+ 
+            // change it into base 16 and typecast as the character
+            char ch = (char)Integer.parseInt(part, 16);
+ 
+            // add this char to final ASCII string
+            ascii = ascii + ch;
+        }
+ 
+        return ascii;
+    }
 	
 	public static String converBintoHex(String bin) {
 		return convertDectoHex(convertBintoDec(bin));
@@ -51,6 +80,9 @@ public class Tools {
 	public static void main(String[] args){
 		System.out.println(convertHextoDec("F"));
 		System.out.println(convertHextoBin("0000"));
+		System.out.println(convertHextoBin("aaaa"));
 		System.out.println(convertBintoDec("11111111"));
+		System.out.println(hexToASCII("65 66 67"));
+		
 	}
 }
