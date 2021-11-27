@@ -201,12 +201,12 @@ public class Dhcp implements ICouches {
 		if(Tools.convertHextoDec(serverName.substring(0, 2))==Tools.convertHextoDec("00")) {
 			sb.append("Server host name not given\n\t");
 		}else {
-			sb.append("Server host name : " + serverName + "\n\t");
+			sb.append("Server host name : " + Tools.hexToASCII(serverName) + "\n\t");
 		}
 		if(Tools.convertHextoDec(bootFileName.substring(0, 2))==Tools.convertHextoDec("00")) {
 			sb.append("Boot file name not given\n\t");
 		}else {
-			sb.append("Boot file name : " + bootFileName + "\n\t");
+			sb.append("Boot file name : " + Tools.hexToASCII(bootFileName) + "\n\t");
 		}
 		sb.append("Magic cookie : DHCP\n\t");
 		for(OptionDHCP op : options) {
