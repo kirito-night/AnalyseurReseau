@@ -49,6 +49,10 @@ public class Dns implements ICouches {
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub
+		StringBuilder sb = new StringBuilder();
+		sb.append("Domain Name System : \n\t");
+		sb.append("Transaction ID :" + identification+ "\n\t");
+		sb.append("Transaction ID :" + identification+ "\n\t");
 		return null;
 	}
 }

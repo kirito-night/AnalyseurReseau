@@ -196,6 +196,24 @@ public class Dhcp implements ICouches {
 		sb.append("Your (Client) IP address : "+yiaddr+"\n\t");
 		sb.append("Next Server Ip address: "+siaddr+"\n\t");
 		sb.append("Relay agent IP address : "+giaddr+"\n\t");
+		sb.append("Client MAC address : " + chaddr + "\n\t");
+		sb.append("Client hardware address padding : " + chaddrPadding + "\n\t");
+		if(Tools.convertHextoDec(serverName.substring(0, 2))==Tools.convertHextoDec("00")) {
+			sb.append("Server host name not given\n\t");
+		}else {
+			sb.append("Server host name : " + serverName + "\n\t");
+		}
+		if(Tools.convertHextoDec(bootFileName.substring(0, 2))==Tools.convertHextoDec("00")) {
+			sb.append("Boot file name not given\n\t");
+		}else {
+			sb.append("Boot file name : " + bootFileName + "\n\t");
+		}
+		sb.append("Magic cookie : DHCP\n\t");
+		for(OptionDHCP op : options) {
+			sb.append(op.analyse()+"\n\t");
+		}
+		
+		
 		
 		return sb.toString();
 	}
