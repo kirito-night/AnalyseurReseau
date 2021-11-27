@@ -1,16 +1,16 @@
 package Couches;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import pobj.tools.Tools;
-
-import static org.junit.Assert.*;
 public class Trame {
 	private Integer numTrame;
 	private List<String> trame;
 	private List<ICouches> couches;
 	
 	
-	public Trame(Integer numTrame, List<String> trame)  {
+	public Trame(Integer numTrame, List<String> trame) {
 		this.numTrame = numTrame;
 		this.trame = trame;
 		
@@ -18,11 +18,10 @@ public class Trame {
 		//analyseCouche();
 		
 		try {
-			if(analyseCouche() == null) {
-				throw new Exception("format incomprehensible non traite dans notre programme");
-			}
+			analyseCouche();
 		}catch (Exception e) {
 			e.getMessage();
+			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
 	}
@@ -51,7 +50,7 @@ public class Trame {
 		this.couches = couches;
 	}
 
-	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame){
+	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame) {
 		List<Trame> res = new ArrayList<>();
 		for(Map.Entry<Integer, List<String>> entry : mapTrame.entrySet()) {
 			Trame currentTrame = new Trame(entry.getKey(), entry.getValue());
@@ -79,14 +78,14 @@ public class Trame {
 		Udp udp = new Udp(trame);
 		return udp;
 	}
-	public ICouches analyseDHCP(List<String> trame, Udp udp) {
-		Dhcp dhcp = new Dhcp(trame , udp);
+	public ICouches analyseDHCP( Udp udp) throws Exception {
+		Dhcp dhcp = new Dhcp( udp);
 		return dhcp;
 	}
 	
 	
 	
-	public String  analyseCouche() throws Exception  {
+	public void  analyseCouche() throws Exception  {
 		Ethernet e  =  (Ethernet)analyseEthernet(this.trame);
 		couches.add(e);
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0800")) {
@@ -101,6 +100,21 @@ public class Trame {
 					
 					String srcPort = udp.getSrcPort();
 					String destPort = udp.getDestPort();
+					int choose =0 ; 
+					if(Tools.convertHextoDec(srcPort) == 67 || Tools.convertHextoDec(srcPort) == 68 ||Tools.convertHextoDec(destPort) == 67 ||  Tools.convertHextoDec(destPort)==68) {
+						choose = 1;
+					}
+					switch (choose) {
+					case 1: {
+						Dhcp dhcp = (Dhcp) analyseDHCP(udp);
+						couches.add(dhcp);
+						break;
+					}
+					default:
+						throw new IllegalArgumentException("Unexpected value: " + choose);
+					}
+					
+					
 					
 					
 					break;
@@ -113,17 +127,18 @@ public class Trame {
 				default: 
 					throw new Exception("unable to analyse protocol");
 			}
-			
+			return;
 		}
 		
 		
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0806")) {
 			//analyse ARP non obligatoire 
+			return;
 		}
 		
 		
+		throw new Exception("unable to analyse ethernet type");
 		
-		return null;
 	}
 	
 	public String[] resultattAnalyse() {

@@ -30,9 +30,9 @@ public class Dhcp implements ICouches {
 	
 	private List<String> data;
 	
-	public Dhcp(List<String> trame, Udp udp) {
+	public Dhcp(Udp udp) throws Exception {
 		this.udp = udp;
-		getChamp(trame);
+		getChamp(udp.getData());
 	}
 	
 	public Udp getUdp() {
@@ -43,9 +43,17 @@ public class Dhcp implements ICouches {
 		this.udp = udp;
 	}
 
-	public void getChamp(List<String> trame) {
-		enteteDHCP = trame.subList(0, Tools.convertHextoDec(udp.getLength()));
-		data =trame.subList(Tools.convertHextoDec(udp.getLength()), trame.size() );
+	public void getChamp(List<String> trame) throws Exception {
+		/*if(trame.size()< Tools.convertHextoDec(udp.getLength())) {
+			throw new Exception("udp length problem"  + trame.size() +" < " +Tools.convertHextoDec(udp.getLength()));
+		}*/
+		enteteDHCP = trame.subList(0, Tools.convertHextoDec(udp.getLength())-8);
+		/*if(trame.size() > Tools.convertHextoDec(udp.getLength())-8 ) {
+			data =trame.subList(Tools.convertHextoDec(udp.getLength())-8, trame.size() );
+		}else {
+			data = null;
+		}*/
+		
 		
 		int i = 0;
 		opcode = enteteDHCP.get(i++);
@@ -53,6 +61,7 @@ public class Dhcp implements ICouches {
 		hardwareAdressLength = enteteDHCP.get(i++);
 		hops = enteteDHCP.get(i++);
 		xid = enteteDHCP.get(i++) +  enteteDHCP.get(i++) + enteteDHCP.get(i++)+ enteteDHCP.get(i++);
+		
 		sec = enteteDHCP.get(i++) +enteteDHCP.get(i++);
 		flags = enteteDHCP.get(i++) + enteteDHCP.get(i++);
 		ciaddr =Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
@@ -61,22 +70,27 @@ public class Dhcp implements ICouches {
 		giaddr =Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
 		chaddr =  enteteDHCP.get(i++) +":" +enteteDHCP.get(i++) +":" + enteteDHCP.get(i++) +":" + enteteDHCP.get(i++)+":" + enteteDHCP.get(i++)+ ":" +enteteDHCP.get(i++) ;
 		chaddrPadding = "";
-		for(; i<10 ; i++) {
+		int n = i +10;
+		for(; i<n ; i++) {
 			chaddrPadding += enteteDHCP.get(i);
 		}
-		assertEquals(10, chaddrPadding.length());
+		assertEquals(20, chaddrPadding.length());
 		serverName = enteteDHCP.get(i++);
-		for(; i<63 ; i++) {
+		n = i +63 ; 
+		for(; i< n ; i++) {
 			serverName += " " + enteteDHCP.get(i);
 		}
+		
+		
 		bootFileName = enteteDHCP.get(i++);
 		
-		for(; i<127 ; i++) {
+		n = i+127;
+		for(; i<n ; i++) {
 			bootFileName += " " +enteteDHCP.get(i);
 		}
 		
-		assertEquals(64, serverName.length());
 		
+		/*
 		while (i< enteteDHCP.size()) {
 			String tag = enteteDHCP.get(i++);
 			if(Tools.convertHextoDec(tag) == 0 || Tools.convertHextoDec(tag) == 255) {
@@ -92,7 +106,7 @@ public class Dhcp implements ICouches {
 				
 			}
 			
-		}
+		}*/
 	}
 	@Override
 	public String analyse() {
@@ -172,7 +186,11 @@ public class Dhcp implements ICouches {
 		if(Tools.convertBintoDec(b) == 1) {
 			sb.append("(Broadcast)\n\t");
 		}
-		sb.append("Client IP address : "+xid+"\n\t");
+		sb.append("Client IP address : "+ciaddr+"\n\t");
+		sb.append("Your (Client) IP address : "+yiaddr+"\n\t");
+		sb.append("Next Server Ip address: "+siaddr+"\n\t");
+		sb.append("Relay agent IP address : "+giaddr+"\n\t");
+		
 		return sb.toString();
 	}
 	

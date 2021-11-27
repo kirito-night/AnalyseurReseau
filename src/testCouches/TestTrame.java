@@ -13,7 +13,7 @@ public class TestTrame {
 		List<Trame> listTrame = Trame.generateListTrame(f1.getMapTrames());
 		
 		for(Trame t : listTrame){
-			System.out.println(Trame.trameToString(t) +"\n");
+			//System.out.println(Trame.trameToString(t) +"\n");
 			
 		
 			

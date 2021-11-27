@@ -28,3 +28,17 @@ User Datagram Protocol :
 	Checksum : 0xdfdb
 
 
+Dnymamic Host Configuration : 
+	Message type : Boot Reply (2)
+	Hardware type : Ethernet (0x01)
+	Hardware address length : 6
+	Hops : 0
+	Transaction ID : 0x00003d1e
+	Seconds elapsed : 0
+	Bootp flags : 0x0000(Unicast)
+	Client IP address : 0.0.0.0
+	Your (Client) IP address : 192.168.0.10
+	Next Server Ip address: 0.0.0.0
+	Relay agent IP address : 0.0.0.0
+	
+
