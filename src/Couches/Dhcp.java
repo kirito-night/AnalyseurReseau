@@ -90,7 +90,7 @@ public class Dhcp implements ICouches {
 		}
 		
 		
-		/*
+		
 		while (i< enteteDHCP.size()) {
 			String tag = enteteDHCP.get(i++);
 			if(Tools.convertHextoDec(tag) == 0 || Tools.convertHextoDec(tag) == 255) {
@@ -106,7 +106,7 @@ public class Dhcp implements ICouches {
 				
 			}
 			
-		}*/
+		}
 	}
 	@Override
 	public String analyse() {
