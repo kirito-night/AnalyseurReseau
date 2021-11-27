@@ -1,5 +1,7 @@
 package pobj.tools;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigInteger;
 
 public class Tools {
@@ -82,7 +84,8 @@ public class Tools {
 		System.out.println(convertHextoBin("0000"));
 		System.out.println(convertHextoBin("aaaa"));
 		System.out.println(convertBintoDec("11111111"));
-		System.out.println(hexToASCII("65 66 67"));
+		System.out.println(hexToASCII("630063"));
+		assertEquals("\0\0", hexToASCII("0000"));
 		
 	}
 }

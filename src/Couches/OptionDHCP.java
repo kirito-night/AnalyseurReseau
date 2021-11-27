@@ -75,6 +75,11 @@ public class OptionDHCP implements ICouches{
 		
 		return sb.toString();
 	}
+
+	@Override
+	public String toString() {
+		return "OptionDHCP [tag=" + tag + ", length=" + length + ", option=" + option + "]";
+	}
 	
 	
 }

@@ -2,6 +2,7 @@ package Couches;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pobj.tools.Tools;
@@ -23,7 +24,9 @@ public class Dhcp implements ICouches {
 	private String chaddr; // client hardware addresses 16 octet
 	private String chaddrPadding;
 	private String serverName ; //serverName 64 octet
-	private String bootFileName; // 128 octet; 
+	private String bootFileName; // 128 octet;
+	
+	private String magicCookie ;
 	private List<OptionDHCP> options; 
 	
 	private List<String> enteteDHCP ; 
@@ -54,6 +57,7 @@ public class Dhcp implements ICouches {
 			data = null;
 		}*/
 		
+		options = new ArrayList<>();
 		
 		int i = 0;
 		opcode = enteteDHCP.get(i++);
@@ -89,7 +93,7 @@ public class Dhcp implements ICouches {
 			bootFileName += " " +enteteDHCP.get(i);
 		}
 		
-		
+		magicCookie = enteteDHCP.get(i++) +  enteteDHCP.get(i++) + enteteDHCP.get(i++)+ enteteDHCP.get(i++);
 		
 		while (i< enteteDHCP.size()) {
 			String tag = enteteDHCP.get(i++);
@@ -99,8 +103,10 @@ public class Dhcp implements ICouches {
 				
 			}else {
 				String length = enteteDHCP.get(i++);
-				List<String> tmp = enteteDHCP.subList(i, i+ Tools.convertHextoDec(length));
+				int lengthOption = i+ Tools.convertHextoDec(length);
+				List<String> tmp = enteteDHCP.subList(i, lengthOption);
 				OptionDHCP op = new OptionDHCP(tag, length, tmp);
+				op.toString();
 				options.add(op);
 				i = i+ Tools.convertHextoDec(length);
 				
