@@ -1,5 +1,6 @@
 package testCouches;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import Couches.Trame;
@@ -20,8 +21,10 @@ public class TestTrame {
 			for(String s : result) {
 				System.out.println(s);
 			}
-			//File file = new File("data/output.txt");
-			//Output.output(result, file);
+			File file = new File("data/output1.txt");
+			
+			Output.output(result, file);
+			
 		
 		}
 	}

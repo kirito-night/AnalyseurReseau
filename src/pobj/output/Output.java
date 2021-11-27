@@ -4,20 +4,44 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.StringJoiner;
 
 public class Output {
 	public static void output(String[] content , File file) {
+	
 		
-		System.out.println(String.join("\n", content));
+		/*StringJoiner sj = new StringJoiner("");
+		for(String s : content) {
+			sj.add(s);
+		}*/
 		
-		String res =String.join("\n", content);
+		//String res = sj.toString();
 		
-		BufferedWriter bw;
+		
+		
+		
 		try {
-			bw = new BufferedWriter(new FileWriter(file));
-			bw.write("");
-			bw.append(res);
+			
+			FileWriter ftmp = new FileWriter(file, false);
+			BufferedWriter btmp = new BufferedWriter(ftmp);
+			btmp.write("");
+			btmp.close();
+
+			
+			FileWriter fw = new FileWriter(file, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			//bw.write("");
+			for(String res : content) {
+				bw.write(res);
+				
+			}
+			//bw.write(String.join("\n\n", content));
+			
+			//bw.write("");
+			//bw.write(res);
+			
 			bw.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

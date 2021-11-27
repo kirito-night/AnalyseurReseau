@@ -79,6 +79,10 @@ public class Trame {
 		Udp udp = new Udp(trame);
 		return udp;
 	}
+	public ICouches analyseDHCP(List<String> trame, Udp udp) {
+		Dhcp dhcp = new Dhcp(trame , udp);
+		return dhcp;
+	}
 	
 	
 	
@@ -94,6 +98,10 @@ public class Trame {
 					//UDP
 					Udp udp = (Udp) analyseUDP(ip.getData());
 					couches.add(udp);
+					
+					String srcPort = udp.getSrcPort();
+					String destPort = udp.getDestPort();
+					
 					
 					break;
 				case 1 :
@@ -119,11 +127,12 @@ public class Trame {
 	}
 	
 	public String[] resultattAnalyse() {
-		String [] result = new String[this.couches.size()];
+		String [] result = new String[this.couches.size()+1];
 		int i = 0;
+		result[i++] = this.trameToString(this);
 		for(ICouches c :couches) {
-			c.analyse();
-			result[i++] = c.analyse();
+			
+			result[i++] = c.analyse()+ "\n\n";
 		}
 		
 		return result;

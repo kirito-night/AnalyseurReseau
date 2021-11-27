@@ -52,13 +52,13 @@ public class Dhcp implements ICouches {
 		hardwareType = enteteDHCP.get(i++);
 		hardwareAdressLength = enteteDHCP.get(i++);
 		hops = enteteDHCP.get(i++);
-		xid = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++)+ enteteDHCP.get(i++);
+		xid = enteteDHCP.get(i++) +  enteteDHCP.get(i++) + enteteDHCP.get(i++)+ enteteDHCP.get(i++);
 		sec = enteteDHCP.get(i++) +enteteDHCP.get(i++);
 		flags = enteteDHCP.get(i++) + enteteDHCP.get(i++);
-		ciaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
-		yiaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
-		siaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
-		giaddr = enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++) + enteteDHCP.get(i++);
+		ciaddr =Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
+		yiaddr =Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
+		siaddr = Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
+		giaddr =Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "." + Tools.convertHextoDec(enteteDHCP.get(i++)) + "."+ Tools.convertHextoDec(enteteDHCP.get(i++));
 		chaddr =  enteteDHCP.get(i++) +":" +enteteDHCP.get(i++) +":" + enteteDHCP.get(i++) +":" + enteteDHCP.get(i++)+":" + enteteDHCP.get(i++)+ ":" +enteteDHCP.get(i++) ;
 		chaddrPadding = "";
 		for(; i<10 ; i++) {
