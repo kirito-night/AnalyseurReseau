@@ -51,8 +51,14 @@ public class Dns implements ICouches {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		sb.append("Domain Name System : \n\t");
-		sb.append("Transaction ID :" + identification+ "\n\t");
-		sb.append("Transaction ID :" + identification+ "\n\t");
+		sb.append("Transaction ID : " + identification+ "\n\t");
+		sb.append("Flags : 0x" + flags + "\n\t");
+		sb.append("Questions : " + Tools.convertHextoDec(numberOfQuestions) + "\n\t" );
+		sb.append("AAnswer RRs : " + Tools.convertHextoDec(numbersOfAnswer) + "\n\t" );
+		sb.append("Authority RRs : " + Tools.convertHextoDec(numberOfAuthority) + "\n\t" );
+		sb.append("Additional RRs : " + Tools.convertHextoDec(numberOfAdditionnal) + "\n\t" );
+		sb.append("Queries\n\t" );
+		
 		return null;
 	}
 }
