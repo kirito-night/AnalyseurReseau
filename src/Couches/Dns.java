@@ -16,7 +16,7 @@ public class Dns implements ICouches {
 	private String numberOfAuthority;
 	private String numberOfAdditionnal;
 	
-	private  List<String> questions;
+	private  List<DnsQuestion> questions;
 	private List<String> answers;
 	private List<String>  authority;
 	private List<String> additionnal;
@@ -61,4 +61,60 @@ public class Dns implements ICouches {
 		
 		return null;
 	}
+	
+	
+	
+	public static String typeAnalyse(int type) {
+		String res; 
+		switch (type) {
+		case 1: {
+			res = "A (Host Adress)";
+			break;
+		}
+		case 2 : 
+			res = "NS (Name Server Record)";
+			break;
+		
+		case 5 : 
+			res = "CNAME (Canonical Name Record)";
+			break;
+		case 6 : 
+			res = "SOA (Start Of Authority Record)";
+			break;
+		case 12 :
+			res = "PTR (Ressource Record)";
+			break;
+		case 15 : 
+			res = "MX (Mail Exchance Record)";
+			break;
+		case 16 :
+			res = "TXT (Text Record)";
+		case 28 : 
+			res = "AAA (Host Adress IPv6)";
+			break;
+		default:
+			 res = "Type not treated";
+		}
+		
+		return res;
+	}
+	
+	public static String classAnalyse(int c) {
+		String res ; 
+		switch (c) {
+		case 1:
+			res = "Internet (IN)";
+			break;
+		case 3:
+			res = "Chaos (CH)";
+			break;
+		case 4:
+			res = "Hesiod (HS)";
+		default:
+			res = "unassiagned or reserved";
+			break;
+		}
+		return res;
+	}
+	
 }
