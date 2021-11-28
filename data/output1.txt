@@ -43,13 +43,13 @@ Dnymamic Host Configuration :
 	Boot file name not given
 	Magic cookie : DHCP
 	Option : (53) DHCP Message Type
-		length : 1
+		Length : 1
 		DHCP : Discosver (1)
-	Option : (12)   Host Name Option 
-		length : 4
+	Option : (12)  Host Name Option 
+		Length : 4
 		Host Name Option : bbox
 	Option : (55) Parameter Request List 
-		length : 18
+		Length : 18
 		Parameter Request List Item : (1)
 		Parameter Request List Item : (28)
 		Parameter Request List Item : (2)

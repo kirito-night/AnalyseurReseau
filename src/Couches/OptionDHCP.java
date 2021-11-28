@@ -33,8 +33,8 @@ public class OptionDHCP implements ICouches{
 			case 1 :
 				sb.append("Option : (1) Subnet Mask\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String sad = String.join(".", option);
-				sb.append("Subnet Mask : " + Tools.convertHextoDec(sad) + "\n\t");
+				String sad = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3));
+				sb.append("Subnet Mask : " + sad + "\n\t");
 				break;
 			case 12 : 
 				sb.append("Option : (12)  Host Name Option \n\t\t");
@@ -97,7 +97,7 @@ public class OptionDHCP implements ICouches{
 			case 32:
 				sb.append("Option : (32) Router Solicitation Address Option\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String ad = String.join(".", option);
+				String ad = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3));
 				sb.append("Address : " + ad + "\n\t");
 				break;
 				
@@ -114,8 +114,9 @@ public class OptionDHCP implements ICouches{
 				//discover request
 				sb.append("Option : (50) Requested IP Address\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String rIp = String.join(".",option);
-				sb.append("Requested IP Address: " + Tools.convertHextoDec(rIp) +"\n\t");
+				
+				String rIp = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3));
+				sb.append("Requested IP Address: " + rIp +"\n\t");
 				break;
 			case 51 :
 				//discover request
@@ -164,8 +165,8 @@ public class OptionDHCP implements ICouches{
 			case 54 : 
 				sb.append("Option : (54) DHCP Server Identifier\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String ipServer = String.join(".",option);
-				sb.append("DHCP Server Identifier : " + Tools.convertHextoDec(ipServer)+"\n\t");
+				String ipServer = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3))
+				sb.append("DHCP Server Identifier : " + ipServer +"\n\t");
 				break;
 			
 			case 55 : 
