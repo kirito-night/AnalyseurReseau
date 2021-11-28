@@ -34,7 +34,7 @@ public class OptionDHCP implements ICouches{
 				sb.append("Option : (1) Subnet Mask\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String sad = String.join(".", option);
-				sb.append("Subnet Mask : " + sad + "\n\t");
+				sb.append("Subnet Mask : " + Tools.convertHextoDec(sad) + "\n\t");
 				break;
 			case 12 : 
 				sb.append("Option : (12)  Host Name Option \n\t\t");
@@ -112,10 +112,10 @@ public class OptionDHCP implements ICouches{
 			case 50 :
 				//discover
 				//discover request
-				sb.append("Option : (50) Ip Address Lease Time \n\t\t");
+				sb.append("Option : (50) Requested IP Address\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String rIp = String.join(".",option);
-				sb.append("Server Ip : " + rIp +"\n\t");
+				sb.append("Requested IP Address: " + Tools.convertHextoDec(rIp) +"\n\t");
 				break;
 			case 51 :
 				//discover request
@@ -162,10 +162,10 @@ public class OptionDHCP implements ICouches{
 				break;
 				
 			case 54 : 
-				sb.append("Option : (54) Server Identifier\n\t\t");
+				sb.append("Option : (54) DHCP Server Identifier\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String ipServer = String.join(".",option);
-				sb.append("Server Ip : " + ipServer+"\n\t");
+				sb.append("DHCP Server Identifier : " + Tools.convertHextoDec(ipServer)+"\n\t");
 				break;
 			
 			case 55 : 
@@ -216,7 +216,7 @@ public class OptionDHCP implements ICouches{
 				sb.append("Hardware type : " ); 
 				extracted(sb, hardwareType);
 				String cIdent = String.join(":", option.subList(1, len));
-				sb.append(cIdent+"\n\t");
+				sb.append("Client MAC Address : " + cIdent+"\n\t");
 				
 				
 				// fonction hardware type a faire
