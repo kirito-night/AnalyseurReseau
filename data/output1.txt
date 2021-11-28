@@ -50,25 +50,24 @@ Dnymamic Host Configuration :
 		Host Name Option : bbox
 	Option : (55) Parameter Request List 
 		length : 18
-		Parameter Request List Item : (1) 
-		Parameter Request List Item : (28) 
-		Parameter Request List Item : (2) 
-		Parameter Request List Item : (3) 
-		Parameter Request List Item : (15) 
-		Parameter Request List Item : (6) 
-		Parameter Request List Item : (119) 
-		Parameter Request List Item : (12) 
-		Parameter Request List Item : (44) 
-		Parameter Request List Item : (47) 
-		Parameter Request List Item : (26) 
-		Parameter Request List Item : (121) 
-		Parameter Request List Item : (42) 
-		Parameter Request List Item : (72) 
-		Parameter Request List Item : (33) 
-		Parameter Request List Item : (51) 
-		Parameter Request List Item : (58) 
-		Parameter Request List Item : (59) 
-		
+		Parameter Request List Item : (1)
+		Parameter Request List Item : (28)
+		Parameter Request List Item : (2)
+		Parameter Request List Item : (3)
+		Parameter Request List Item : (15)
+		Parameter Request List Item : (6)
+		Parameter Request List Item : (119)
+		Parameter Request List Item : (12)
+		Parameter Request List Item : (44)
+		Parameter Request List Item : (47)
+		Parameter Request List Item : (26)
+		Parameter Request List Item : (121)
+		Parameter Request List Item : (42)
+		Parameter Request List Item : (72)
+		Parameter Request List Item : (33)
+		Parameter Request List Item : (51)
+		Parameter Request List Item : (58)
+		Parameter Request List Item : (59)
 	Option (255) End 
 		 Option End : 255
 	

@@ -2,6 +2,8 @@ package Couches;
 
 import java.util.List;
 
+import javax.tools.Tool;
+
 import pobj.tools.Tools;
 
 public class OptionDHCP implements ICouches{
@@ -28,66 +30,97 @@ public class OptionDHCP implements ICouches{
 			case 0 :
 				break;
 			case 12 : 
-				sb.append("Option : (12)   Host Name Option \n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Option : (12)  Host Name Option \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String hName = String.join(" ",option);
 				sb.append("Host Name Option : " + Tools.hexToASCII(hName)+"\n\t");
 				break;
+				
+			case 19 :
+				sb.append("Option : (19) IP Forwarding Enable/Disable Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+					sb.append("Enable IP forwarding\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+					sb.append("Disable IP forwarding\n\t");
+				}
+				break;
+				
+			case 24:
+				sb.append("Option : (24) Path MTU Aging Timeout Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String t = String.join("", option);
+				sb.append("Timeout : (" + Tools.convertHextoDec(t) + " s)\n\t");
+				break;
+				
+			case 29:
+				sb.append("Option : (29) Perform Mask Discovery Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+					sb.append("The client should perform mask discovery\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+					sb.append("The client should not perform mask discovery\n\t");
+				}
+				break;
+				
+			case 30:
+				sb.append("Option : (30) Mask Supplier Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+					sb.append("The client should respond\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+					sb.append("The client should not respond\n\t");
+				}
+				break;
+			
+			case 31:
+				sb.append("Option : (31) Perform Router Discovery Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+					sb.append("The client should perform router discovery\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+					sb.append("The client should not perform router discovery\n\t");
+				}
+				break;
+				
+			case 32:
+				sb.append("Option : (32) Router Solicitation Address Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String ad = String.join(".", option);
+				sb.append("Address : " + ad + "\n\t");
+				break;
+				
+			case 38:
+				sb.append("Option : (38) TCP Keepalive Interval Option\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String tm = String.join("", option);
+				sb.append("Time : (" + Tools.convertHextoDec(tm) + " s)\n\t");
+				break;
+			
+			
 			case 50 :
 				//discover
 				//discover request
 				sb.append("Option : (50) Ip Address Lease Time \n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String rIp = String.join(".",option);
 				sb.append("Server Ip : " + rIp +"\n\t");
 				break;
 			case 51 :
 				//discover request
 				sb.append("Option : (51) Ip Address Lease Time \n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String leasteTime = String.join("",option);
 				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime)+"\n\t");
 				break;
-			case 54 : 
-				sb.append("Option : (54) Server Identifier\n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String ipServer = String.join(".",option);
-				sb.append("Server Ip : " + ipServer+"\n\t");
-				break;
-			
-			case 55 : 
 				
-				sb.append("Option : (55) Parameter Request List \n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				for(String s : option) {
-					sb.append("Parameter Request List Item : (" + Tools.convertHextoDec(s)+") \n\t\t");
-				}
-				break;
-				
-			case 57 :
-				//discover
-				break; 
-			case 59:
-				
-				break;
-			
-			case 61:
-				sb.append("Option : (61) Client Identifier\n\t\t");
-				int len = Tools.convertHextoDec(length);
-				sb.append("length : " + len  +"\n\t\t");
-				String hardwareType  = option.get(0);
-				sb.append("Hardware type : " ); 
-				extracted(sb, hardwareType);
-				String cIdent = String.join(":", option.subList(1, len));
-				sb.append(cIdent+"\n\t");
-				
-				
-				// fonction hardware type a faire
-				
-				break;
 			case 53 :
 				sb.append("Option : (53) DHCP Message Type\n\t\t");
-				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				
 				switch (Tools.convertHextoDec(option.get(0))){
 				case 1: 
@@ -120,8 +153,71 @@ public class OptionDHCP implements ICouches{
 				}
 				
 				break;
+				
+			case 54 : 
+				sb.append("Option : (54) Server Identifier\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String ipServer = String.join(".",option);
+				sb.append("Server Ip : " + ipServer+"\n\t");
+				break;
+			
+			case 55 : 
+				
+				sb.append("Option : (55) Parameter Request List \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length));
+				for(String s : option) {
+					sb.append("\n\t\t"+"Parameter Request List Item : (" + Tools.convertHextoDec(s)+")");
+				}
+				sb.append("\n\t");
+				break;
+				
+			case 56 :
+				
+				sb.append("Option : (56) Message\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String mess = String.join("", option);
+				sb.append("Message  : " + Tools.hexToASCII(mess)+"\n\t");
+				
+			case 57 :
+				//discover
+				sb.append("Option : (57) Maximum DHCP Message Size\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String l = String.join("", option);
+				sb.append("Mmaximum length DHCP message  : " + Tools.convertHextoDec(l)+"\n\t");
+				
+				break; 
+				
+			case 58:
+				sb.append("Option : (58) Renewal Time Value\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String tmp = String.join("", option);
+				sb.append("Renewal Time Value : (" + Tools.convertHextoDec(tmp) + " s)\n\t");
+				break;
+				
+			case 59:
+				sb.append("Option : (59) Rebinding Time Value\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String v = String.join("", option);
+				sb.append("Rebinding Time Value : (" + Tools.convertHextoDec(v) + " s)\n\t");
+				break;
+			
+			case 61:
+				sb.append("Option : (61) Client Identifier\n\t\t");
+				int len = Tools.convertHextoDec(length);
+				sb.append("Length : " + len  +"\n\t\t");
+				String hardwareType  = option.get(0);
+				sb.append("Hardware type : " ); 
+				extracted(sb, hardwareType);
+				String cIdent = String.join(":", option.subList(1, len));
+				sb.append(cIdent+"\n\t");
+				
+				
+				// fonction hardware type a faire
+				
+				break;
+			
 			case 255:
-				sb.append("\n\tOption (255) End \n\t\t Option End : 255"+"\n\t");
+				sb.append("Option (255) End \n\t\t Option End : 255"+"\n\t");
 				break;
 			default :
 				sb.append("unable analyse option : " +  Tools.convertHextoDec(tag)+"\n\t");
@@ -182,7 +278,7 @@ public class OptionDHCP implements ICouches{
 		default:
 			sb.append("unable to analyse option type");
 }
-		sb.append(hardwareType+"\n\t\t");
+		sb.append(hardwareType+")\n\t\t");
 	}
 
 	@Override

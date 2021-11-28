@@ -156,14 +156,14 @@ public class Ip implements ICouches {
 	}
 	private StringBuilder analysePartieFixe() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Internet Protocol Version 4 : \n\tVersion : ");
-		sb.append(version + "\n\tHearder Length : ");
-		sb.append(ihl + "\n\tType of service : 0x");
-		sb.append(tos+"\n\t");
-		sb.append("Total Length : "+Tools.convertHextoDec(totalLength) + "\n\tIdentification : 0x");
-		sb.append(identifer + " ("+ Tools.convertHextoDec(identifer)+")"+"\n\tFlags : 0x");
+		sb.append("Internet Protocol Version 4 : \n\t");
+		sb.append("Version : " + version + "\n\t");
+		sb.append("Hearder Length : " + ihl + "\n\t");
+		sb.append("Type of service : 0x" + tos+"\n\t");
+		sb.append("Total Length : "+Tools.convertHextoDec(totalLength) + "\n\t");
+		sb.append("Identification : 0x" + identifer + " ("+ Tools.convertHextoDec(identifer)+")\n\t");
 		
-		sb.append(flags + "\n\t\t");
+		sb.append("Flags : 0x" + flags + "\n\t\t");
 		if(Tools.convertHextoDec(df)==1) {
 			sb.append("df :"+df+" Don't fragment\n\t\t");
 		}
@@ -176,20 +176,20 @@ public class Ip implements ICouches {
 		if(Tools.convertHextoDec(mf) ==0) {
 			sb.append("mf :"+mf+" More fragment\n\t");
 		}
-		sb.append("Fragment Offset :"+fragmentOffset + "\n\tTime to live : ");
-		sb.append(Tools.convertHextoDec(ttl)+"\n\tProtocol : ");
+		sb.append("Fragment Offset :"+fragmentOffset + "\n\t");
+		sb.append("Time to live : "+ Tools.convertHextoDec(ttl)+"\n\t");
 		if(Tools.convertHextoDec(protocol)==1) {
-			sb.append("ICMP (1)\n\tHeader checksum : 0x");
+			sb.append("Protocol : ICMP (1)\n\t");
 		}
 		if(Tools.convertHextoDec(protocol)==6) {
-			sb.append("TCP (6)\n\tHeader checksum : 0x");
+			sb.append("Protocol : TCP (6)\n\t");
 		}
 		if(Tools.convertHextoDec(protocol)==17) {
-			sb.append("UDP (17)\n\tHeader checksum : 0x");
+			sb.append("Protocol : UDP (17)\n\t");
 		}
-		sb.append(headerChecksum+   " ("+ Tools.convertHextoDec(headerChecksum)+")" + "\n\tSource : ");
-		sb.append(srcIpAdress+"\n\tDestination : ");
-		sb.append(destIpAdress+"\n\t");
+		sb.append("Header checksum : 0x" + headerChecksum+   " ("+ Tools.convertHextoDec(headerChecksum)+")\n\t");
+		sb.append("Source : " + srcIpAdress+"\n\t");
+		sb.append("Destination : "+ destIpAdress+"\n\t");
 		return sb;
 	}
 	

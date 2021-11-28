@@ -103,14 +103,14 @@ public class Ethernet implements ICouches{
 	
 	public String analyse() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Ethernet II : \n\tDestination : ");
-		sb.append(destMac + "\n\tSource : ");
-		sb.append(srcMac + "\n\tType : ");
+		sb.append("Ethernet II : \n\t");
+		sb.append("Destination : "+ destMac + "\n\t");
+		sb.append("Source : " + srcMac + "\n\t");
 		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0800")) {
-			sb.append("IPv4 "+"(0x"+type+")"+ "\n");
+			sb.append("Type : IPv4 "+"(0x"+type+")"+ "\n");
 		}
 		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0806")) {
-			sb.append("ARP "+"(0x"+type+")"+ "\n");
+			sb.append("Type : ARP "+"(0x"+type+")"+ "\n");
 		}
 	
 		return sb.toString();
