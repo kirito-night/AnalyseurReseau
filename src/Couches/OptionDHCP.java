@@ -165,7 +165,7 @@ public class OptionDHCP implements ICouches{
 			case 54 : 
 				sb.append("Option : (54) DHCP Server Identifier\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				String ipServer = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3))
+				String ipServer = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3));
 				sb.append("DHCP Server Identifier : " + ipServer +"\n\t");
 				break;
 			
