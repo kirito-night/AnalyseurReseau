@@ -29,6 +29,13 @@ public class OptionDHCP implements ICouches{
 		switch(Tools.convertHextoDec(tag)) {
 			case 0 :
 				break;
+				
+			case 1 :
+				sb.append("Option : (1) Subnet Mask\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				String sad = String.join(".", option);
+				sb.append("Subnet Mask : " + sad + "\n\t");
+				break;
 			case 12 : 
 				sb.append("Option : (12)  Host Name Option \n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
