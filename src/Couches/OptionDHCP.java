@@ -46,10 +46,10 @@ public class OptionDHCP implements ICouches{
 			case 19 :
 				sb.append("Option : (19) IP Forwarding Enable/Disable Option\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+				if(Tools.convertHextoDec(option.get(0))==1) {
 					sb.append("Enable IP forwarding\n\t");
 				}
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+				if(Tools.convertHextoDec(option.get(0))==0) {
 					sb.append("Disable IP forwarding\n\t");
 				}
 				break;
@@ -64,10 +64,10 @@ public class OptionDHCP implements ICouches{
 			case 29:
 				sb.append("Option : (29) Perform Mask Discovery Option\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+				if(Tools.convertHextoDec(option.get(0))==1) {
 					sb.append("The client should perform mask discovery\n\t");
 				}
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+				if(Tools.convertHextoDec(option.get(0))==0) {
 					sb.append("The client should not perform mask discovery\n\t");
 				}
 				break;
@@ -75,10 +75,10 @@ public class OptionDHCP implements ICouches{
 			case 30:
 				sb.append("Option : (30) Mask Supplier Option\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+				if(Tools.convertHextoDec(option.get(0))==1) {
 					sb.append("The client should respond\n\t");
 				}
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+				if(Tools.convertHextoDec(option.get(0))==0) {
 					sb.append("The client should not respond\n\t");
 				}
 				break;
@@ -86,10 +86,10 @@ public class OptionDHCP implements ICouches{
 			case 31:
 				sb.append("Option : (31) Perform Router Discovery Option\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("01")) {
+				if(Tools.convertHextoDec(option.get(0))==1) {
 					sb.append("The client should perform router discovery\n\t");
 				}
-				if(Tools.convertHextoDec(option.get(0))==Tools.convertHextoDec("00")) {
+				if(Tools.convertHextoDec(option.get(0))==0) {
 					sb.append("The client should not perform router discovery\n\t");
 				}
 				break;
