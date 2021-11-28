@@ -25,11 +25,13 @@ public class OptionDHCP implements ICouches{
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		switch(Tools.convertHextoDec(tag)) {
+			case 0 :
+				break;
 			case 12 : 
 				sb.append("Option : (12)   Host Name Option \n\t\t");
 				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String hName = String.join(" ",option);
-				sb.append("Host Name Option : " + Tools.hexToASCII(hName));
+				sb.append("Host Name Option : " + Tools.hexToASCII(hName)+"\n\t");
 				break;
 			case 50 :
 				//discover
@@ -37,20 +39,20 @@ public class OptionDHCP implements ICouches{
 				sb.append("Option : (50) Ip Address Lease Time \n\t\t");
 				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String rIp = String.join(".",option);
-				sb.append("Server Ip : " + rIp);
+				sb.append("Server Ip : " + rIp +"\n\t");
 				break;
 			case 51 :
 				//discover request
 				sb.append("Option : (51) Ip Address Lease Time \n\t\t");
 				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String leasteTime = String.join("",option);
-				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime));
+				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime)+"\n\t");
 				break;
 			case 54 : 
 				sb.append("Option : (54) Server Identifier\n\t\t");
 				sb.append("length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String ipServer = String.join(".",option);
-				sb.append("Server Ip : " + ipServer);
+				sb.append("Server Ip : " + ipServer+"\n\t");
 				break;
 			
 			case 55 : 
@@ -77,7 +79,7 @@ public class OptionDHCP implements ICouches{
 				sb.append("Hardware type : " ); 
 				extracted(sb, hardwareType);
 				String cIdent = String.join(":", option.subList(1, len));
-				sb.append(cIdent );
+				sb.append(cIdent+"\n\t");
 				
 				
 				// fonction hardware type a faire
@@ -89,40 +91,40 @@ public class OptionDHCP implements ICouches{
 				
 				switch (Tools.convertHextoDec(option.get(0))){
 				case 1: 
-					sb.append("DHCP : Discosver (1)" );
+					sb.append("DHCP : Discosver (1)" +"\n\t" );
 					break;
 				case 2 :
-					sb.append("DHCP : Offer (2)" );
+					sb.append("DHCP : Offer (2)"+"\n\t");
 					break;
 				case 3 :
-					sb.append("DHCP : Request (3)" );
+					sb.append("DHCP : Request (3)"+"\n\t" );
 					break;
 				case 4 :
-					sb.append("DHCP : Decline (4)" );
+					sb.append("DHCP : Decline (4)" +"\n\t");
 					
 					break;
 				case 5 :
-					sb.append("DHCP : Ack (5)" );
+					sb.append("DHCP : Ack (5)"+"\n\t" );
 					break; 
 				case 6 :
-					sb.append("DHCP : Nak (6)" );
+					sb.append("DHCP : Nak (6)"+"\n\t" );
 					break;
 				case 7 :
-					sb.append("DHCP : Release (7)" );
+					sb.append("DHCP : Release (7)" +"\n\t");
 					break;
 				case 8:
-					sb.append("DHCP : Inform (8)" );
+					sb.append("DHCP : Inform (8)" +"\n\t");
 					break;
 				default:
-					throw new IllegalArgumentException("Unexpected value: " + option.get(0));
+					throw new IllegalArgumentException("Unexpected value: " + option.get(0)+"\n\t");
 				}
 				
 				break;
 			case 255:
-				sb.append("Option (255) End \n\t\t Option End : 255");
+				sb.append("\n\tOption (255) End \n\t\t Option End : 255"+"\n\t");
 				break;
 			default :
-				sb.append("unable analyse option : " +  Tools.convertHextoDec(tag));
+				sb.append("unable analyse option : " +  Tools.convertHextoDec(tag)+"\n\t");
 		}
 		
 		return sb.toString();

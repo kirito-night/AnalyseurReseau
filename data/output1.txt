@@ -3,7 +3,6 @@ ff ff ff ff ff ff b8 66 85 9a b1 0c 08 00 45 10 01 2a 00 00 00 00 40 11 79 b4 00
 	Source : b8:66:85:9a:b1:0c
 	Type : IPv4 (0x0800)
 
-
 Internet Protocol Version 4 : 
 	Version : 4
 	Hearder Length : 5
@@ -20,13 +19,11 @@ Internet Protocol Version 4 :
 	Source : 0.0.0.0
 	Destination : 255.255.255.255
 	
-
 User Datagram Protocol : 
 	Source Port : 68
 	Destination Port : 67
 	Length : 278
 	Checksum : 0xcfb4
-
 
 Dnymamic Host Configuration : 
 	Message type : Boot Request (1)
@@ -75,4 +72,3 @@ Dnymamic Host Configuration :
 	Option (255) End 
 		 Option End : 255
 	
-

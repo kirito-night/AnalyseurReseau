@@ -147,7 +147,7 @@ public class Trame {
 		result[i++] = this.trameToString(this);
 		for(ICouches c :couches) {
 			
-			result[i++] = c.analyse()+ "\n\n";
+			result[i++] = c.analyse()+ "\n";
 		}
 		
 		return result;

@@ -19,7 +19,7 @@ public class TestTrame {
 			
 			String [] result = t.resultattAnalyse();
 			for(String s : result) {
-				System.out.println(s);
+				System.out.print(s);
 			}
 			File file = new File("data/output1.txt");
 			

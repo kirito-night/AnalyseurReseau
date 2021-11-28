@@ -98,8 +98,12 @@ public class Dhcp implements ICouches {
 		while (i< enteteDHCP.size()) {
 			String tag = enteteDHCP.get(i++);
 			if(Tools.convertHextoDec(tag) == 0 || Tools.convertHextoDec(tag) == 255) {
-				OptionDHCP op = new OptionDHCP(tag);
-				options.add(op);
+				if(Tools.convertHextoDec(tag) == 255) {
+					OptionDHCP op = new OptionDHCP(tag);
+					
+					options.add(op);
+				}
+				
 				
 			}else {
 				String length = enteteDHCP.get(i++);
@@ -210,7 +214,7 @@ public class Dhcp implements ICouches {
 		}
 		sb.append("Magic cookie : DHCP\n\t");
 		for(OptionDHCP op : options) {
-			sb.append(op.analyse()+"\n\t");
+			sb.append(op.analyse());
 		}
 		
 		
