@@ -32,5 +32,13 @@ public class DnsRR implements ICouches {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
 	
 }

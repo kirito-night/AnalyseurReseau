@@ -25,6 +25,12 @@ public class DnsQuestion implements ICouches{
 		qClass =  trame.get(i++) + trame.get(i++);
 		length = i;
 	}
+	public int getLength() {
+		return length;
+	}
+	public void setLength(int length) {
+		this.length = length;
+	}
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub

@@ -83,7 +83,9 @@ public class Trame {
 		return dhcp;
 	}
 	
-	
+	public ICouches analyseDNS (Udp udp) {
+		Dns dns = new Dns(udp)
+	}
 	
 	public void  analyseCouche() throws Exception  {
 		Ethernet e  =  (Ethernet)analyseEthernet(this.trame);
@@ -104,12 +106,18 @@ public class Trame {
 					if(Tools.convertHextoDec(srcPort) == 67 || Tools.convertHextoDec(srcPort) == 68 ||Tools.convertHextoDec(destPort) == 67 ||  Tools.convertHextoDec(destPort)==68) {
 						choose = 1;
 					}
+					if(Tools.convertHextoDec(srcPort) == 53 ||Tools.convertHextoDec(destPort) == 53  ) {
+						choose = 2;
+					}
+					
 					switch (choose) {
 					case 1: {
 						Dhcp dhcp = (Dhcp) analyseDHCP(udp);
 						couches.add(dhcp);
 						break;
 					}
+					case 2 : //dns
+					
 					default:
 						throw new IllegalArgumentException("Unexpected value: " + choose);
 					}

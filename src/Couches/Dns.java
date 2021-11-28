@@ -17,18 +17,18 @@ public class Dns implements ICouches {
 	private String numberOfAdditionnal;
 	
 	private  List<DnsQuestion> questions;
-	private List<String> answers;
-	private List<String>  authority;
-	private List<String> additionnal;
+	private List<DnsRR> answers;
+	private List<DnsRR>  authority;
+	private List<DnsRR> additionnal;
 	
 	
 	private List<String> enteteDNS;
 	private List<String> data;
 	
 	
-	public Dns(List<String> trame , Udp udp) {
+	public Dns(Udp udp) {
 		this.udp = udp;
-		getchamp(trame);
+		getchamp(udp.getData());
 	}
 	public void getchamp(List<String> trame) {
 		// TODO Auto-generated method stub
@@ -41,6 +41,33 @@ public class Dns implements ICouches {
 		numbersOfAnswer = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAuthority = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAdditionnal = enteteDNS.get(i++) + enteteDNS.get(i++); 
+		
+		for(int j = 0 ; j < Tools.convertHextoDec(numberOfQuestions) ; j++) {
+			DnsQuestion q = new DnsQuestion(enteteDNS.subList(i, enteteDNS.size()));
+			questions.add(q);
+			i += q.getLength();
+		}
+		
+		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
+			DnsRR asw = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
+			answers.add(asw);
+			i+= asw.getLength();
+		}
+		
+		
+		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
+			DnsRR auth = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
+			answers.add(auth);
+			i+= auth.getLength();
+		}
+		
+		
+		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
+			DnsRR addi = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
+			answers.add(addi);
+			i+= addi.getLength();
+		}
+		
 		assertEquals(12, i);
 		
 	}
