@@ -18,9 +18,9 @@ public class Dns implements ICouches {
 	private String numberOfAdditionnal;
 	
 	private  List<DnsQuestion> questions;
-	private List<DnsRR> answers;
-	private List<DnsRR>  authority;
-	private List<DnsRR> additionnal;
+	private List<DnsAnswer> answers;
+	private List<DnsAuthority>  authority;
+	private List<DnsAdditionel> additionnal;
 	
 	
 	private List<String> enteteDNS;
@@ -48,29 +48,34 @@ public class Dns implements ICouches {
 		numberOfAdditionnal = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		questions = new ArrayList<>();
 		
+		answers = new ArrayList<>();
+		authority = new ArrayList<>();
+		additionnal = new ArrayList<>();
+		
 		for(int j = 0 ; j < Tools.convertHextoDec(numberOfQuestions) ; j++) {
 			DnsQuestion q = new DnsQuestion(enteteDNS.subList(i, enteteDNS.size()));
 			questions.add(q);
 			i += q.getLength();
 		}
 		
-		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
-			DnsRR asw = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
+		int  nAnswer = Tools.convertHextoDec(numbersOfAnswer);
+		for(int k = 0 ; k <  nAnswer; k++ ) {
+			DnsAnswer asw = new DnsAnswer(enteteDNS.subList(i, enteteDNS.size()));
 			answers.add(asw);
 			i+= asw.getLength();
 		}
 		
 		
-		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
-			DnsRR auth = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
-			answers.add(auth);
+		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAuthority) ; k++ ) {
+			DnsAuthority auth = new DnsAuthority(enteteDNS.subList(i, enteteDNS.size()));
+			authority.add(auth);
 			i+= auth.getLength();
 		}
 		
 		
-		for(int k = 0 ; k < Tools.convertHextoDec(numbersOfAnswer) ; k++ ) {
-			DnsRR addi = new DnsRR(enteteDNS.subList(i, enteteDNS.size()));
-			answers.add(addi);
+		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAdditionnal) ; k++ ) {
+			DnsAdditionel addi = new DnsAdditionel(enteteDNS.subList(i, enteteDNS.size()));
+			additionnal.add(addi);
 			i+= addi.getLength();
 		}
 		
@@ -92,6 +97,9 @@ public class Dns implements ICouches {
 		sb.append("Additional RRs : " + Tools.convertHextoDec(numberOfAdditionnal) + "\n\t" );
 		for(DnsQuestion q : questions) {
 			sb.append(q.analyse());
+		}
+		for(DnsRR r : answers) {
+			sb.append(r.analyse());
 		}
 
 		
@@ -128,6 +136,9 @@ public class Dns implements ICouches {
 		case 28 : 
 			res = "AAA (Host Adress IPv6)";
 			break;
+		case 41:
+			res = "OPT";
+		
 		default:
 			 res = "Type not treated";
 		}
@@ -152,5 +163,37 @@ public class Dns implements ICouches {
 		}
 		return res;
 	}
+	
+	public static int rrData(int  oType , int oClass) {
+		int res;
+		
+		switch(oClass) {
+		case 1 : 
+			switch (oType) {
+			case 1: 
+				//class IN et Type A 
+				res = 1;
+			break;
+			case 28:
+				//class IN type AAAA
+				res = 2;
+			
+			default :
+				res = 0; 
+				break;
+			}
+				
+			break;
+		
+		
+		default:
+			res = 0; 
+			
+		
+		}
+		return res;
+	}
+	
+	
 	
 }

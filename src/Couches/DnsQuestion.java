@@ -39,10 +39,12 @@ public class DnsQuestion implements ICouches{
 		
 		sb.append("Name : " + Tools.hexToASCII(qName)+ "\n\t\t");
 		sb.append("[Name Length : " + qName.length()+ "]\n\t\t");
-		sb.append("[Label count : 3 ?] \n\t\t" ); // a voir si c'est 3 ou non 
+		//sb.append("[Label count : 3 ?] \n\t\t" ); // a voir si c'est 3 ou non 
 		int type = Tools.convertHextoDec(qType);
+		
 		sb.append("Type : " + Dns.typeAnalyse(type)+ "(" +type+ ")\n\t\t" );
-		sb.append("Class : (0x" + qClass + ")" +Dns.classAnalyse(Tools.convertHextoDec(qClass)) +"\n\t\t" );
+		sb.append("Class : (0x" + qClass + ")" +Dns.classAnalyse(Tools.convertHextoDec(qClass)) +"\n\t" );
+		
 		return sb.toString();
 	}
 	
