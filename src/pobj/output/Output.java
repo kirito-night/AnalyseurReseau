@@ -21,20 +21,22 @@ public class Output {
 		
 		
 		try {
-			
+			/*
 			FileWriter ftmp = new FileWriter(file, false);
 			BufferedWriter btmp = new BufferedWriter(ftmp);
 			btmp.write("");
-			btmp.close();
+			btmp.close();*/
 
-			
-			FileWriter fw = new FileWriter(file, true);
+			String res = String.join("",content);
+			FileWriter fw = new FileWriter(file, false);
 			BufferedWriter bw = new BufferedWriter(fw);
 			//bw.write("");
-			for(String res : content) {
+			/*for(String res : content) {
 				bw.write(res);
 				
-			}
+			}*/
+			bw.write(res);
+			System.out.println(res);
 			//bw.write(String.join("\n\n", content));
 			
 			//bw.write("");

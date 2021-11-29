@@ -1,5 +1,83 @@
+<<<<<<< HEAD
 00 00 00 01 00 06 b8 66 85 9a b1 0c 08 00 08 00 45 80 00 76 b0 9b 40 00 40 11 04 fa c0 a8 01 fe c0 a8 01 13 00 35 ad 60 00 62 bb 46 79 ec 81 80 00 01 00 02 00 00 00 01 12 63 6f 6e 6e 65 63 74 69 76 69 74 79 2d 63 68 65 63 6b 06 75 62 75 6e 74 75 03 63 6f 6d 00 00 01 00 01 c0 0c 00 01 00 01 00 00 00 0b 00 04 23 e8 6f 11 c0 0c 00 01 00 01 00 00 00 0b 00 04 23 e0 aa 54 00 00 29 04 c4 00 00 00 00 00 00Ethernet II : 
 	Destination : 00:00:00:01:00:06
+=======
+ff ff ff ff ff ff b8 66 85 9a b1 0c 08 00 45 10 01 2a 00 00 00 00 40 11 79 b4 00 00 00 00 ff ff ff ff 00 44 00 43 01 16 cf b4 01 01 06 00 00 0c a4 a3 a3 77 80 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 b8 66 85 9a b1 0c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 63 82 53 63 35 01 01 0c 04 62 62 6f 78 37 12 01 1c 02 03 0f 06 77 0c 2c 2f 1a 79 2a 48 21 33 3a 3b ff
+
+Ethernet II : 
+	Destination : ff:ff:ff:ff:ff:ff
+>>>>>>> branch 'master' of git@github.com:kirito-night/AnalyseurReseau.git
 	Source : b8:66:85:9a:b1:0c
 	Type : IPv4 (0x0800)
 
+<<<<<<< HEAD
+=======
+Internet Protocol Version 4 : 
+	Version : 4
+	Hearder Length : 5
+	Type of service : 0x10
+	Total Length : 298
+	Identification : 0x0000 (0)
+	Flags : 0x0000
+		df : 0 Could fragment
+		mf : 0 No More fragment
+	Fragment Offset :0000000000000
+	Time to live : 64
+	Protocol : UDP (17)
+	Header checksum : 0x79b4 (31156)
+	Source : 0.0.0.0
+	Destination : 255.255.255.255
+	
+User Datagram Protocol : 
+	Source Port : 68
+	Destination Port : 67
+	Length : 278
+	Checksum : 0xcfb4
+
+Dnymamic Host Configuration : 
+	Message type : Boot Request (1)
+	Hardware type : Ethernet (0x01)
+	Hardware address length : 6
+	Hops : 0
+	Transaction ID : 0x000ca4a3
+	Seconds elapsed : 41847
+	Bootp flags : 0x8000(Broadcast)
+	Client IP address : 0.0.0.0
+	Your (Client) IP address : 0.0.0.0
+	Next Server Ip address: 0.0.0.0
+	Relay agent IP address : 0.0.0.0
+	Client MAC address : b8:66:85:9a:b1:0c
+	Client hardware address padding : 00000000000000000000
+	Server host name not given
+	Boot file name not given
+	Magic cookie : DHCP
+	Option : (53) DHCP Message Type
+		Length : 1
+		DHCP : Discosver (1)
+	Option : (12)  Host Name Option 
+		Length : 4
+		Host Name Option : bbox
+	Option : (55) Parameter Request List 
+		Length : 18
+		Parameter Request List Item : (1)
+		Parameter Request List Item : (28)
+		Parameter Request List Item : (2)
+		Parameter Request List Item : (3)
+		Parameter Request List Item : (15)
+		Parameter Request List Item : (6)
+		Parameter Request List Item : (119)
+		Parameter Request List Item : (12)
+		Parameter Request List Item : (44)
+		Parameter Request List Item : (47)
+		Parameter Request List Item : (26)
+		Parameter Request List Item : (121)
+		Parameter Request List Item : (42)
+		Parameter Request List Item : (72)
+		Parameter Request List Item : (33)
+		Parameter Request List Item : (51)
+		Parameter Request List Item : (58)
+		Parameter Request List Item : (59)
+	Option (255) End 
+		 Option End : 255
+	
+>>>>>>> branch 'master' of git@github.com:kirito-night/AnalyseurReseau.git

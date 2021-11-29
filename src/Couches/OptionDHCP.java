@@ -126,6 +126,21 @@ public class OptionDHCP implements ICouches{
 				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime)+"\n\t");
 				break;
 				
+			case 52:
+				sb.append("Option : (52) Option Overload\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				if(Tools.convertHextoDec(option.get(0))==1) {
+					sb.append("The 'file' field is used to hold options\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==2) {
+					sb.append("The 'sname' field is used to hold options\n\t");
+				}
+				if(Tools.convertHextoDec(option.get(0))==3) {
+					sb.append("Both fields are used to hold options\n\t");
+				}
+				break;
+				
+				
 			case 53 :
 				sb.append("Option : (53) DHCP Message Type\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
