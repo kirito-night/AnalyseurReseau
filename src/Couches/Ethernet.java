@@ -106,12 +106,21 @@ public class Ethernet implements ICouches{
 		sb.append("Ethernet II : \n\t");
 		sb.append("Destination : "+ destMac + "\n\t");
 		sb.append("Source : " + srcMac + "\n\t");
-		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0800")) {
-			sb.append("Type : IPv4 "+"(0x"+type+")"+ "\n");
+		
+		switch(Tools.convertHextoDec(type)) {
+			case  2048:
+				sb.append("Type : IPv4 "+"(0x"+type+")"+ "\n");
+				break;
+			case 2054 :
+				sb.append("Type : ARP "+"(0x"+type+")"+ "\n");
+				break;
+			case 34525 : 
+				sb.append("Type : IPv6 "+"(0x"+type+")"+ "\n");
+			default : 
+				sb.append("Type : unable analyse type "+"(0x"+type+")"+ "\n");
 		}
-		if(Tools.convertHextoDec(type)==Tools.convertHextoDec("0806")) {
-			sb.append("Type : ARP "+"(0x"+type+")"+ "\n");
-		}
+		
+		
 	
 		return sb.toString();
 

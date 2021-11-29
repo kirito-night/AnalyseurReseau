@@ -2,6 +2,7 @@ package Couches;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pobj.tools.Tools;
@@ -26,14 +27,18 @@ public class Dns implements ICouches {
 	private List<String> data;
 	
 	
-	public Dns(Udp udp) {
+	public Dns(Udp udp) throws Exception {
 		this.udp = udp;
 		getchamp(udp.getData());
 	}
-	public void getchamp(List<String> trame) {
+	public void getchamp(List<String> trame) throws Exception {
 		// TODO Auto-generated method stub
-		enteteDNS = trame.subList(0, Tools.convertHextoDec(udp.getLength()));
-		data = trame.subList(Tools.convertHextoDec(udp.getLength()), trame.size());
+		/*if(enteteDNS.size() < Tools.convertHextoDec(udp.getLength()) - 8){
+			throw new Exception("enteDNS " + enteteDNS.size() + " < " +  Tools.convertHextoDec(udp.getLength()));
+		}*/
+		
+		enteteDNS = trame.subList(0, Tools.convertHextoDec(udp.getLength())- 8);
+		data = trame.subList(Tools.convertHextoDec(udp.getLength())-8, trame.size());
 		int i =0; 
 		identification = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		flags = enteteDNS.get(i++) + enteteDNS.get(i++); 
@@ -41,6 +46,7 @@ public class Dns implements ICouches {
 		numbersOfAnswer = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAuthority = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAdditionnal = enteteDNS.get(i++) + enteteDNS.get(i++); 
+		questions = new ArrayList<>();
 		
 		for(int j = 0 ; j < Tools.convertHextoDec(numberOfQuestions) ; j++) {
 			DnsQuestion q = new DnsQuestion(enteteDNS.subList(i, enteteDNS.size()));
@@ -68,7 +74,7 @@ public class Dns implements ICouches {
 			i+= addi.getLength();
 		}
 		
-		assertEquals(12, i);
+		
 		
 	}
 	
@@ -84,9 +90,12 @@ public class Dns implements ICouches {
 		sb.append("AAnswer RRs : " + Tools.convertHextoDec(numbersOfAnswer) + "\n\t" );
 		sb.append("Authority RRs : " + Tools.convertHextoDec(numberOfAuthority) + "\n\t" );
 		sb.append("Additional RRs : " + Tools.convertHextoDec(numberOfAdditionnal) + "\n\t" );
-		sb.append("Queries\n\t" );
+		for(DnsQuestion q : questions) {
+			sb.append(q.analyse());
+		}
+
 		
-		return null;
+		return sb.toString();
 	}
 	
 	

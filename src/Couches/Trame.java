@@ -10,17 +10,18 @@ public class Trame {
 	private List<ICouches> couches;
 	
 	
-	public Trame(Integer numTrame, List<String> trame) {
+	public Trame(Integer numTrame, List<String> trame) throws Exception {
 		this.numTrame = numTrame;
 		this.trame = trame;
 		
 		couches = new ArrayList<>();
 		//analyseCouche();
 		
+		
 		try {
 			analyseCouche();
 		}catch (Exception e) {
-			e.getMessage();
+			//System.out.println(e.getStackTrace());
 			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
@@ -50,7 +51,7 @@ public class Trame {
 		this.couches = couches;
 	}
 
-	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame) {
+	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame) throws Exception {
 		List<Trame> res = new ArrayList<>();
 		for(Map.Entry<Integer, List<String>> entry : mapTrame.entrySet()) {
 			Trame currentTrame = new Trame(entry.getKey(), entry.getValue());
@@ -67,7 +68,7 @@ public class Trame {
 		
 	}
 	
-	public ICouches analyseIP(List<String> trame) {
+	public ICouches analyseIP(List<String> trame) throws Exception {
 		
 		
 		Ip ip = new Ip(trame);
@@ -83,8 +84,9 @@ public class Trame {
 		return dhcp;
 	}
 	
-	public ICouches analyseDNS (Udp udp) {
-		Dns dns = new Dns(udp)
+	public ICouches analyseDNS (Udp udp) throws Exception {
+		Dns dns = new Dns(udp);
+		return dns ;
 	}
 	
 	public void  analyseCouche() throws Exception  {
@@ -117,7 +119,9 @@ public class Trame {
 						break;
 					}
 					case 2 : //dns
-					
+						Dns dns =(Dns) analyseDNS(udp);
+						couches.add(dns);
+						break;
 					default:
 						throw new IllegalArgumentException("Unexpected value: " + choose);
 					}

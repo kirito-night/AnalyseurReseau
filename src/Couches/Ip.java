@@ -42,11 +42,11 @@ public class Ip implements ICouches {
 	private List<String> enteteIP ; 
 	private List<String> data;
 	
-	public Ip(List<String> trame) {
+	public Ip(List<String> trame) throws Exception {
 		
 		getchamp(trame);
 	}
-	public void getchamp(List<String> trame) {
+	public void getchamp(List<String> trame) throws Exception {
 		String tmp = trame.get(0);
 		version = tmp.substring(0, 1);
 		ihl = tmp.substring(1, 2);
@@ -54,15 +54,17 @@ public class Ip implements ICouches {
 			enteteIP = trame.subList(0, 20);
 			data = trame.subList(20, trame.size());
 			partieFixe();
-			
+			return;
 		}
 		if(Tools.convertHextoDec(tmp) == 15) {
 			enteteIP = trame.subList(0, 60);
 			data = trame.subList(60, trame.size());
 			partieFixe();
 			optionIP();
+			return; 
 		}
 		
+		throw new Exception("problem of ihl, size not 5 or 15");
 	}
 	
 	private void partieFixe() {
