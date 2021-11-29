@@ -165,16 +165,16 @@ public class Ip implements ICouches {
 		
 		sb.append("Flags : 0x" + flags + "\n\t\t");
 		if(Tools.convertHextoDec(df)==1) {
-			sb.append("df :"+df+" Don't fragment\n\t\t");
+			sb.append("df : "+df+" Don't fragment\n\t\t");
 		}
 		if(Tools.convertHextoDec(df)==0) {
-			sb.append("df :"+df+" Could fragment\n\t\t");
+			sb.append("df : "+df+" Could fragment\n\t\t");
 		}
 		if(Tools.convertHextoDec(mf)==1) {
-			sb.append("mf :"+mf+" No More fragment\n\t");
+			sb.append("mf : "+mf+" More fragment\n\t");
 		}
 		if(Tools.convertHextoDec(mf) ==0) {
-			sb.append("mf :"+mf+" More fragment\n\t");
+			sb.append("mf : "+mf+" No More fragment\n\t");
 		}
 		sb.append("Fragment Offset :"+fragmentOffset + "\n\t");
 		sb.append("Time to live : "+ Tools.convertHextoDec(ttl)+"\n\t");

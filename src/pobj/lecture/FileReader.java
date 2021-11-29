@@ -34,7 +34,16 @@ public class FileReader {
 		mapTrames.remove(0);
 	}
 	
-	
+	public FileReader (File file) {
+		this.file = file;
+		mapTrames = new HashMap<>();
+		filename = file.getName();
+		fullTrames = read();
+		tramesBrut = read().split("0000");
+		
+		mapTrames = tramesFilter();
+		mapTrames.remove(0);
+	}
 	
 	
 	

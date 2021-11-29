@@ -144,7 +144,7 @@ public class Trame {
 	public String[] resultattAnalyse() {
 		String [] result = new String[this.couches.size()+1];
 		int i = 0;
-		result[i++] = this.trameToString(this);
+		result[i++] = this.trameToString(this)+"\n\n";
 		for(ICouches c :couches) {
 			
 			result[i++] = c.analyse()+ "\n";
