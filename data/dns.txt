@@ -69,6 +69,7 @@
 00b0   00 00 00
 
 //dernier 2 trame du fichier wireshark
+ss
 0000   b8 66 85 9a b1 0c 90 61 ae 7c c9 96 08 00 45 00
 0010   00 4f e8 12 40 00 40 11 ce 29 c0 a8 01 13 c0 a8
 0020   01 fe b6 d4 00 35 00 3b 4a 9e 50 e6 01 00 00 01
