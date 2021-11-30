@@ -1,5 +1,7 @@
 package Couches;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import pobj.tools.Tools;
@@ -15,12 +17,19 @@ public class DnsQuestion implements ICouches{
 	private void getChamp(List<String> trame) {
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
-		while(Tools.convertHextoDec(trame.get(i)) != 0 && i < trame.size()) {
+		/*while(Tools.convertHextoDec(trame.get(i)) != 0 && i < trame.size()) {
 			sb.append(trame.get(i));
 			i++;
+		}*/
+		//sb.append(trame.get(i++));
+		//qName = sb.toString();
+		qName = Dns.domainNameRead(trame);
+		while(Tools.convertHextoDec(trame.get(i)) != 0 && i < trame.size()) {
+			i++;
 		}
-		sb.append(trame.get(i++));
-		qName = sb.toString();
+		assertEquals(0, Tools.convertHextoDec(trame.get(i)));
+		i++;
+		
 		qType = trame.get(i++) + trame.get(i++);
 		qClass =  trame.get(i++) + trame.get(i++);
 		length = i;
@@ -37,7 +46,7 @@ public class DnsQuestion implements ICouches{
 		StringBuilder sb = new StringBuilder();
 		sb.append("Queries \n\t\t");
 		
-		sb.append("Name : " + Tools.hexToASCII(qName)+ "\n\t\t");
+		sb.append("Name : " +qName+ "\n\t\t");
 		sb.append("[Name Length : " + qName.length()+ "]\n\t\t");
 		//sb.append("[Label count : 3 ?] \n\t\t" ); // a voir si c'est 3 ou non 
 		int type = Tools.convertHextoDec(qType);

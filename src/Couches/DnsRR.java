@@ -11,12 +11,14 @@ public class DnsRR implements ICouches {
 	String ttl;
 	String rdLength;
 	String rdata;
+	List<String> enteteDns;
 	
-	
+	String ptrName;
 	
 	private int length;
 	
-	public DnsRR(List<String> trame) throws Exception {
+	public DnsRR(List<String> trame, List<String> enteteDns) throws Exception {
+		this.enteteDns = enteteDns;
 		int i = 0;
 		if(Tools.convertHextoDec(trame.get(i)) ==0 ) {
 			name = trame.get(i++);
@@ -39,6 +41,8 @@ public class DnsRR implements ICouches {
 		rdata =String.join("", trame.subList(i, len));
 		
 		length = len;
+		
+		ptrName = findName();
 	}
 
 	@Override
@@ -50,7 +54,7 @@ public class DnsRR implements ICouches {
 		if(Tools.convertHextoDec(name) ==0 ) {
 			sb.append("Name : " + "<Root>"+ "\n\t\t");
 		}else {
-			sb.append("Name : " + Tools.hexToASCII(name)+ "\n\t\t");
+			sb.append("Name : " + ptrName+ "\n\t\t");
 		}
 	
 		
@@ -66,6 +70,19 @@ public class DnsRR implements ICouches {
 		
 		return sb.toString();
 	}
+	
+	
+	public String findName() {
+		String binName = Tools.convertHextoBin(name);
+		String offset  =binName.substring(2,binName.length());
+		int ptr = Tools.convertBintoDec(offset);
+		return Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+		
+		
+		
+		
+	}
+	
 
 	public String getName() {
 		return name;

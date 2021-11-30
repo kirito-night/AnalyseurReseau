@@ -46,8 +46,8 @@ public class Dns implements ICouches {
 		numbersOfAnswer = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAuthority = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		numberOfAdditionnal = enteteDNS.get(i++) + enteteDNS.get(i++); 
-		questions = new ArrayList<>();
 		
+		questions = new ArrayList<>();
 		answers = new ArrayList<>();
 		authority = new ArrayList<>();
 		additionnal = new ArrayList<>();
@@ -60,24 +60,24 @@ public class Dns implements ICouches {
 		
 		int  nAnswer = Tools.convertHextoDec(numbersOfAnswer);
 		for(int k = 0 ; k <  nAnswer; k++ ) {
-			DnsAnswer asw = new DnsAnswer(enteteDNS.subList(i, enteteDNS.size()));
+			DnsAnswer asw = new DnsAnswer(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			answers.add(asw);
 			i+= asw.getLength();
 		}
 		
 		
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAuthority) ; k++ ) {
-			DnsAuthority auth = new DnsAuthority(enteteDNS.subList(i, enteteDNS.size()));
+			DnsAuthority auth = new DnsAuthority(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			authority.add(auth);
 			i+= auth.getLength();
 		}
 		
-		
+		/*
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAdditionnal) ; k++ ) {
-			DnsAdditionel addi = new DnsAdditionel(enteteDNS.subList(i, enteteDNS.size()));
+			DnsAdditionel addi = new DnsAdditionel(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			additionnal.add(addi);
 			i+= addi.getLength();
-		}
+		}*/
 		
 		
 		
@@ -90,7 +90,8 @@ public class Dns implements ICouches {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Domain Name System : \n\t");
 		sb.append("Transaction ID : " + identification+ "\n\t");
-		sb.append("Flags : 0x" + flags + "\n\t");
+		sb.append("Flags : 0x" + flags + "\n\t\t");
+		sb.append(flagAnalyse());
 		sb.append("Questions : " + Tools.convertHextoDec(numberOfQuestions) + "\n\t" );
 		sb.append("AAnswer RRs : " + Tools.convertHextoDec(numbersOfAnswer) + "\n\t" );
 		sb.append("Authority RRs : " + Tools.convertHextoDec(numberOfAuthority) + "\n\t" );
@@ -98,15 +99,162 @@ public class Dns implements ICouches {
 		for(DnsQuestion q : questions) {
 			sb.append(q.analyse());
 		}
-		for(DnsRR r : answers) {
+		for(DnsAnswer r : answers) {
 			sb.append(r.analyse());
 		}
 
 		
 		return sb.toString();
 	}
+	private String flagAnalyse() {
+		StringBuilder sb = new StringBuilder();
+		String binFlag = Tools.convertHextoBin(flags);
+		String qr = binFlag.substring(0, 1);
+		String opCode = binFlag.substring(1,5);
+		String aa = binFlag.substring(5,6);
+		String tc = binFlag.substring(6,7);
+		String rd = binFlag.substring(7,8);
+		String ra = binFlag.substring(8,9);
+		String z = binFlag.substring(9,10);
+		String ad = binFlag.substring(10,11);
+		String cf = binFlag.substring(11,12);
+		String rCode = binFlag.substring(12,16);
+		
+		
+		switch (Tools.convertHextoDec(qr)) {
+		case 0 :
+			sb.append(qr +"... .... .... .... = Response : message is a querie\n\t\t");
+			break;
+		case 1:
+			sb.append(qr +"... .... .... .... = Response : message is a response\n\t\t");
+			break;
+
+		default:
+			sb.append("problem of qr(flag) section\n\t\t");
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(opCode)) {
+		case 0 :
+			sb.append(".000 0... .... .... = OpCode : Standard Querie(0)\n\t\t");
+			break;
+		case 1 :
+			sb.append(".000 1... .... .... = OpCode :Inverse Querie(1)\n\t\t");
+			break;
+		case 2 : 
+			sb.append(".001 0... .... .... = OpCode :Server Status Request(2)\n\t\t");
+			break;
+		default:
+			sb.append("problem of opcode(flag) section\n\t\t");
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(aa)) {
+		case 0:
+			sb.append(".... .0.. .... .... = Authorative : Server is not an authorative for domain \n\t\t");
+			break;
+		case 1:
+			sb.append(".... .1.. .... .... = Authorative : Server is an authorative for domain \n\t\t");
+			break;
+		default:
+			sb.append("problem of aa(flag) section\n\t\t");
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(tc)) {
+		case 0:
+			sb.append(".... ..0. .... .... = Truncated : message is not truncated \n\t\t");
+			break;
+		case 1 :
+			sb.append(".... ..1. .... .... = Truncated : message is truncated \n\t\t");
+			break;
+		default:
+			sb.append("problem of tc(flag) section\n\t\t");
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(rd)) {
+		case 1:
+			sb.append(".... ...1 .... .... = Recursion desired : do query recursively \n\t\t");
+			break;
+		case 0:
+			sb.append(".... ...0 .... .... = Recursion not desired : don't do query recursively \n\t\t");
+			break;
+		default:
+			sb.append("problem of rd(flag) section\n\t\t");
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(ra)) {
+		case 0:
+			sb.append(".... .... 0... .... = Recursion Not Available : do query recursively \n\t\t");
+			break;
+		case 1 : 
+			sb.append(".... .... 1... .... = Recursion Available :Server can do query recursively \n\t\t");
+			break;
+		default:
+			sb.append("problem of ra(flag) section\n\t\t");
+			break;
+		}
+		
+		sb.append(".... .... .0.. .... = Z : reserved (0)");
+		
+		switch (Tools.convertHextoDec(ad)) {
+		case 0:
+			sb.append(".... .... ..0. .... = Non-Authenticated by the server  \n\t\t");
+			break;
+		case 1 : 
+			sb.append(".... .... ..1. .... = Authenticated by the server \n\t\t");
+			break;
+		default:
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(cf)) {
+		case 0:
+			sb.append(".... .... ...0 .... = Non-Authenticated data : Unacceptable  \n\t\t");
+			break;
+		case 1 :
+			sb.append(".... .... ...1 .... = Authenticated data : Acceptable n\t\t");
+			break;
+		default:
+			break;
+		}
+		
+		switch (Tools.convertHextoDec(rCode)) {
+		case 0:
+			sb.append(".... .... .... 0000 = Reply error : No error(0) \n\t");
+			break;
+
+		default:
+			sb.append(".... .... .... 0000 = Reply error :  Error("+ Tools.convertHextoDec(rCode)+") \n\t");
+			break;
+		}
+		
+		return sb.toString();
+	}
 	
-	
+	public static String domainNameRead(List<String> name) {
+		List<String> list = new ArrayList<>();
+		int i = 0;
+		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
+			int tmpLen = Tools.convertHextoDec(name.get(i++));
+			tmpLen += i;
+			
+			String str = String.join("", name.subList(i, tmpLen));
+			
+			list.add(str);
+			i = tmpLen;
+			
+		}
+		List<String> tmp = new ArrayList<>();
+		for(String s : list) {
+			tmp.add(Tools.hexToASCII(s));
+		}
+		String res = String.join(".", tmp);
+		
+		return res ;
+	}
 	
 	public static String typeAnalyse(int type) {
 		String res; 

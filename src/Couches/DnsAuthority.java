@@ -6,8 +6,8 @@ import pobj.tools.Tools;
 
 public class DnsAuthority extends DnsRR {
 
-	public DnsAuthority(List<String> trame) throws Exception {
-		super(trame);
+	public DnsAuthority(List<String> trame , List<String> enteteDns) throws Exception {
+		super(trame, enteteDns);
 		// TODO Auto-generated constructor stub
 	}
 	

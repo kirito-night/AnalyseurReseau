@@ -6,8 +6,8 @@ import pobj.tools.Tools;
 
 public class DnsAnswer extends DnsRR {
 
-	public DnsAnswer(List<String> trame) throws Exception {
-		super(trame);
+	public DnsAnswer(List<String> trame, List<String> enteteDns) throws Exception {
+		super(trame, enteteDns);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -20,7 +20,7 @@ public class DnsAnswer extends DnsRR {
 		if(Tools.convertHextoDec(name) ==0 ) {
 			sb.append("Name : " + "<Root>"+ "\n\t\t");
 		}else {
-			sb.append("Name : " + Tools.hexToASCII(name)+ "\n\t\t");
+			sb.append("Name : " + ptrName+ "\n\t\t");
 		}
 	
 		
@@ -36,4 +36,7 @@ public class DnsAnswer extends DnsRR {
 		
 		return sb.toString();
 	}
+	
+	
+	
 }

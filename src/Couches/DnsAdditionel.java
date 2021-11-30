@@ -6,8 +6,8 @@ import pobj.tools.Tools;
 
 public class DnsAdditionel extends DnsRR {
 
-	public DnsAdditionel(List<String> trame) throws Exception {
-		super(trame);
+	public DnsAdditionel(List<String> trame,List<String> enteteDns) throws Exception {
+		super(trame, enteteDns);
 		// TODO Auto-generated constructor stub
 	}
 	
