@@ -156,7 +156,7 @@ public class Trame {
 	public String[] resultattAnalyse() {
 		String [] result = new String[this.couches.size()+1];
 		int i = 0;
-		result[i++] = this.trameToString(this)+"\n\n";
+		result[i++] = Trame.trameToString(this)+"\n\n";
 		for(ICouches c :couches) {
 			
 			result[i++] = c.analyse()+ "\n";
@@ -169,8 +169,29 @@ public class Trame {
 	
 	public static String trameToString (Trame trame) {
 		List<String> list = trame.getTrame();
+		StringBuilder sb = new StringBuilder();
+		int fromIndex = 0 ; 
+		int toIndex = 16;
+		String offset = "0000";
+		while(toIndex <= list.size()) {
+			sb.append(offset + "  ");
+			sb.append(String.join(" ", list.subList(fromIndex, toIndex)));
+			sb.append("\n");
+			
+			fromIndex = toIndex;
+			toIndex+=16;
+			int tmp = Tools.convertHextoDec(offset);
+			tmp+= 16;
+			offset = Tools.convertDectoHex(tmp);
+			while(offset.length() < 4) {
+				offset  = "0" + offset;
+			}
+			
+			
+		}
 		
-		return String.join(" ", list);
+		//return String.join(" ", list);
+		return sb.toString();
 	}
 	
 	

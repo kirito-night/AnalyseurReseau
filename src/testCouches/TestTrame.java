@@ -11,7 +11,8 @@ public class TestTrame {
 		FileReader f1 = new FileReader("data/dns.txt");
 		
 		List<Trame> listTrame = Trame.generateListTrame(f1.getMapTrames());
-		
+		StringBuilder sb = new StringBuilder();
+		File file = new File("data/output1.txt");
 		for(Trame t : listTrame){
 			//System.out.println(Trame.trameToString(t) +"\n");
 			
@@ -21,12 +22,16 @@ public class TestTrame {
 			/*for(String s : result) {
 				System.out.print(s);
 			}*/
-			File file = new File("data/output1.txt");
 			
-			Output.output(result, file);
+			
+			String res = String.join("", result);
+			sb.append(res);
+			//Output.output(result, file);
+			
 			
 		
 		}
+		Output.outputStream(sb.toString(), file);
 	}
 	
 }

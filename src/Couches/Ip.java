@@ -48,7 +48,7 @@ public class Ip implements ICouches {
 	}
 	public void getchamp(List<String> trame) throws Exception {
 		String tmp = trame.get(0);
-		System.out.println(Tools.convertHextoDec(tmp));
+		
 		version = tmp.substring(0, 1);
 		ihl = tmp.substring(1, 2);
 		if(Tools.convertHextoDec(ihl) == 5) {
