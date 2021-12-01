@@ -20,7 +20,7 @@ public class DnsAdditionel extends DnsRR {
 		if(Tools.convertHextoDec(name) ==0 ) {
 			sb.append("Name : " + "<Root>"+ "\n\t\t");
 		}else {
-			sb.append("Name : " + Tools.hexToASCII(name)+ "\n\t\t");
+			sb.append("Name : " + ptrName + "\n\t\t");
 		}
 	
 		

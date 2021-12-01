@@ -8,7 +8,7 @@ import pobj.lecture.FileReader;
 import pobj.output.Output;
 public class TestTrame {
 	public static void main(String[] argrs) throws Exception {
-		FileReader f1 = new FileReader("data/ipv4_with_option.txt");
+		FileReader f1 = new FileReader("data/dns.txt");
 		
 		List<Trame> listTrame = Trame.generateListTrame(f1.getMapTrames());
 		

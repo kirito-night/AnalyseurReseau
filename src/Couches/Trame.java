@@ -21,7 +21,7 @@ public class Trame {
 		try {
 			analyseCouche();
 		}catch (Exception e) {
-			//System.out.println(e.getStackTrace());
+			System.out.println(e.getStackTrace());
 			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}

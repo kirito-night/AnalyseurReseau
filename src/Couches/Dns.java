@@ -73,12 +73,12 @@ public class Dns implements ICouches {
 			i+= auth.getLength();
 		}
 		
-		/*
+		
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAdditionnal) ; k++ ) {
 			DnsAdditionel addi = new DnsAdditionel(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			additionnal.add(addi);
 			i+= addi.getLength();
-		}*/
+		}
 		
 		
 		
@@ -105,6 +105,10 @@ public class Dns implements ICouches {
 		}
 		for(DnsAuthority a : authority) {
 			sb.append(a.analyse());
+		}
+		
+		for(DnsAdditionel addi : additionnal) {
+			sb.append(addi.analyse());
 		}
 
 		
@@ -299,7 +303,7 @@ public class Dns implements ICouches {
 			break;
 		case 41:
 			res = "OPT";
-		
+			break;
 		default:
 			 res = "Type not treated";
 		}
