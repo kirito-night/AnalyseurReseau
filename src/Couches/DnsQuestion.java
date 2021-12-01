@@ -11,10 +11,10 @@ public class DnsQuestion implements ICouches{
 	private String qType;
 	private String qClass;
 	private int length;
-	public DnsQuestion (List<String> trame) {
+	public DnsQuestion (List<String> trame) throws Exception {
 		getChamp(trame);
 	}
-	private void getChamp(List<String> trame) {
+	private void getChamp(List<String> trame) throws Exception {
 		StringBuilder sb = new StringBuilder();
 		int i = 0;
 		/*while(Tools.convertHextoDec(trame.get(i)) != 0 && i < trame.size()) {

@@ -65,12 +65,13 @@ public class Dns implements ICouches {
 			i+= asw.getLength();
 		}
 		
-		/* a finir
+		
+		
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAuthority) ; k++ ) {
 			DnsAuthority auth = new DnsAuthority(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			authority.add(auth);
 			i+= auth.getLength();
-		}*/
+		}
 		
 		/*
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAdditionnal) ; k++ ) {
@@ -89,7 +90,7 @@ public class Dns implements ICouches {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
 		sb.append("Domain Name System : \n\t");
-		sb.append("Transaction ID : " + identification+ "\n\t");
+		sb.append("Transaction ID : 0x" + identification+ "\n\t");
 		sb.append("Flags : 0x" + flags + "\n\t\t");
 		sb.append(flagAnalyse());
 		sb.append("Questions : " + Tools.convertHextoDec(numberOfQuestions) + "\n\t" );
@@ -101,6 +102,9 @@ public class Dns implements ICouches {
 		}
 		for(DnsAnswer r : answers) {
 			sb.append(r.analyse());
+		}
+		for(DnsAuthority a : authority) {
+			sb.append(a.analyse());
 		}
 
 		
@@ -234,24 +238,33 @@ public class Dns implements ICouches {
 		return sb.toString();
 	}
 	
-	public static String domainNameRead(List<String> name) {
+	public static String domainNameRead(List<String> name) throws Exception {
 		List<String> list = new ArrayList<>();
 		int i = 0;
 		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
 			int tmpLen = Tools.convertHextoDec(name.get(i++));
 			tmpLen += i;
+			/*
+			try {
+				if(tmpLen > name.size()) {
+					throw new Exception("pb de taille de String : " + tmpLen + " > " + name.size() + "hexa : " + name.get(--i) + "\n trame : " + name.toString());
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}*/
+			
+			
 			
 			String str = String.join("", name.subList(i, tmpLen));
-			
-			list.add(str);
+			String elem = Tools.hexToASCII(str);
+			list.add(elem);
 			i = tmpLen;
 			
 		}
-		List<String> tmp = new ArrayList<>();
-		for(String s : list) {
-			tmp.add(Tools.hexToASCII(s));
-		}
-		String res = String.join(".", tmp);
+		
+		String res = String.join(".", list);
 		
 		return res ;
 	}

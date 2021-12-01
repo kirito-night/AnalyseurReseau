@@ -48,6 +48,7 @@ public class Ip implements ICouches {
 	}
 	public void getchamp(List<String> trame) throws Exception {
 		String tmp = trame.get(0);
+		System.out.println(Tools.convertHextoDec(tmp));
 		version = tmp.substring(0, 1);
 		ihl = tmp.substring(1, 2);
 		if(Tools.convertHextoDec(ihl) == 5) {
@@ -56,7 +57,8 @@ public class Ip implements ICouches {
 			partieFixe();
 			return;
 		}
-		if(Tools.convertHextoDec(tmp) == 15) {
+		if(Tools.convertHextoDec(ihl) == 15) {
+			
 			enteteIP = trame.subList(0, 60);
 			data = trame.subList(60, trame.size());
 			partieFixe();
@@ -151,7 +153,7 @@ public class Ip implements ICouches {
 				for(String s:listeIPpasser) {
 					sb.append("\t"+s+"\n\t");
 				}
-				sb.append("/n/tPadding : "+padding+"/n");
+				sb.append("Padding : "+padding+"\n");
 			
 		}
 		return sb.toString();
@@ -166,6 +168,7 @@ public class Ip implements ICouches {
 		sb.append("Identification : 0x" + identifer + " ("+ Tools.convertHextoDec(identifer)+")\n\t");
 		
 		sb.append("Flags : 0x" + flags + "\n\t\t");
+		sb.append("r : "+r+" Reserved\n\t\t");
 		if(Tools.convertHextoDec(df)==1) {
 			sb.append("df : "+df+" Don't fragment\n\t\t");
 		}

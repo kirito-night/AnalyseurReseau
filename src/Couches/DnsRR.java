@@ -42,7 +42,13 @@ public class DnsRR implements ICouches {
 		
 		length = len;
 		
-		ptrName = findName();
+		
+		if(Tools.convertHextoDec(name) ==0 ) {
+			ptrName = "<Root>";
+		}else {
+			ptrName = findName();
+		}
+		
 	}
 
 	@Override
@@ -72,7 +78,7 @@ public class DnsRR implements ICouches {
 	}
 	
 	
-	public String findName() {
+	public String findName() throws Exception {
 		String binName = Tools.convertHextoBin(name);
 		String offset  =binName.substring(2,binName.length());
 		int ptr = Tools.convertBintoDec(offset);

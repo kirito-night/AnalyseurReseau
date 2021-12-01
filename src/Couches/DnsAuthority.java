@@ -20,7 +20,7 @@ public class DnsAuthority extends DnsRR {
 		if(Tools.convertHextoDec(name) ==0 ) {
 			sb.append("Name : " + "<Root>"+ "\n\t\t");
 		}else {
-			sb.append("Name : " + Tools.hexToASCII(name)+ "\n\t\t");
+			sb.append("Name : " + ptrName+ "\n\t\t");
 		}
 	
 		
@@ -29,7 +29,7 @@ public class DnsAuthority extends DnsRR {
 		sb.append("Type : " + Dns.typeAnalyse(atype)+ "(" +atype+ ")\n\t\t" );
 		sb.append("Class : (0x" + rClass + ")" +Dns.classAnalyse(Tools.convertHextoDec(rClass)) +"\n\t\t" );
 		sb.append("TTL : "+Tools.convertHextoDec(ttl) +"s\n\t\t" );
-		sb.append("Data Length : " + rdata.length());
+		sb.append("Data Length : " + rdata.length() +"\n\t\t" );
 		
 		
 		
