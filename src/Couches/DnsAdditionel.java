@@ -14,7 +14,7 @@ public class DnsAdditionel extends DnsRR {
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		sb.append("Additionnel  \n\t\t");
 		
 		if(Tools.convertHextoDec(name) ==0 ) {
@@ -34,6 +34,7 @@ public class DnsAdditionel extends DnsRR {
 		
 		
 		
-		return sb.toString();
+		return sb.toString();*/
+		return "Additional\n\t\t" + super.analyse();
 	}
 }

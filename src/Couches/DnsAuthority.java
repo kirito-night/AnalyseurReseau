@@ -14,7 +14,7 @@ public class DnsAuthority extends DnsRR {
 	@Override
 	public String analyse() {
 		// TODO Auto-generated method stub
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		sb.append("Authority   \n\t\t");
 		
 		if(Tools.convertHextoDec(name) ==0 ) {
@@ -34,7 +34,9 @@ public class DnsAuthority extends DnsRR {
 		
 		
 		
-		return sb.toString();
+		return sb.toString();*/
+		
+		return  "Authority\n\t\t" + super.analyse();
 	}
 
 }

@@ -10,7 +10,7 @@ public class DnsRR implements ICouches {
 	String rClass;
 	String ttl;
 	String rdLength;
-	String rdata;
+	List<String> rdata;
 	List<String> enteteDns;
 	
 	String ptrName;
@@ -38,7 +38,7 @@ public class DnsRR implements ICouches {
 		if(trame.size() < len) {
 			throw new Exception(trame.size() + " < " +len + "dns option data size ");
 		}
-		rdata =String.join("", trame.subList(i, len));
+		rdata =trame.subList(i, len);
 		
 		length = len;
 		
@@ -55,7 +55,7 @@ public class DnsRR implements ICouches {
 	public String analyse() {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
-		sb.append("Answers  \n\t\t");
+		
 		
 		if(Tools.convertHextoDec(name) ==0 ) {
 			sb.append("Name : " + "<Root>"+ "\n\t\t");
@@ -69,9 +69,52 @@ public class DnsRR implements ICouches {
 		sb.append("Type : " + Dns.typeAnalyse(atype)+ "(" +atype+ ")\n\t\t" );
 		sb.append("Class : (0x" + rClass + ")" +Dns.classAnalyse(Tools.convertHextoDec(rClass)) +"\n\t\t" );
 		sb.append("TTL : "+Tools.convertHextoDec(ttl) +"s\n\t\t" );
-		sb.append("Data Length : " + rdata.length());
+		sb.append("Data Length : " + rdata.size() + "\n\t\t" );
 		
-		
+		if(rdata.size() == 0){
+			sb.append("\n\t");
+		}else {
+			int rdataFormat = Dns.rrData(Tools.convertHextoDec(type), Tools.convertHextoDec(rClass));
+			switch (rdataFormat) {
+			case 1:
+				//class IN et TYPE A 
+				if(rdata.size() == 4) {
+					String addr = Tools.convertHextoDec(rdata.get(0))+ "."+ Tools.convertHextoDec(rdata.get(1))+ "." + Tools.convertHextoDec(rdata.get(2))+ "." +Tools.convertHextoDec(rdata.get(3));
+					
+					sb.append("Address : "+  addr + "\n\t");
+				}else {
+					sb.append("data length problem \n\t");
+				}
+				break;
+			case 2 :
+				///type AAAA
+				if(rdata.size() == 16) {
+					sb.append("AAAA Address : " + rdata.get(0)+rdata.get(1)+":"+rdata.get(2)+rdata.get(3)+"::"+rdata.get(12)+rdata.get(13)+":"+ rdata.get(14) + rdata.get(15) + "\n\t") ;
+				}else {
+					sb.append("data length problem \n\t");
+				}
+				break ;
+			case 3:
+				//Cname
+				sb.append("Cannonical Name: " + Dns.domainNameRead(rdata)+"\n\t");
+				break;
+			case 4  :
+				//mail Exchange
+				int pref = Tools.convertHextoDec(rdata.get(0)+rdata.get(1));
+				sb.append(" Mail Exchange , Preferences : "+ pref+" Exchange :" + Dns.domainNameRead(rdata.subList(2, rdata.size()))+"\n\t");
+				break;
+			case 5 : 
+				//authoritative name server
+				sb.append("Authoritative Name Server : " + Dns.domainNameRead(rdata)+"\n\t");
+				break;
+			//case 6 : 
+				//SOA   start of a zone of authority
+			//	break;
+			default:
+				sb.append("rData format not treated\n\t");
+				break;
+			}
+		}
 		
 		
 		return sb.toString();
@@ -130,11 +173,11 @@ public class DnsRR implements ICouches {
 		this.rdLength = rdLength;
 	}
 
-	public String getRdata() {
+	public List<String> getRdata() {
 		return rdata;
 	}
 
-	public void setRdata(String rdata) {
+	public void setRdata(List<String> rdata) {
 		this.rdata = rdata;
 	}
 

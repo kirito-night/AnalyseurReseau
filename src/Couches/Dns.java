@@ -242,13 +242,13 @@ public class Dns implements ICouches {
 		return sb.toString();
 	}
 	
-	public static String domainNameRead(List<String> name) throws Exception {
+	public static String domainNameRead(List<String> name)  {
 		List<String> list = new ArrayList<>();
 		int i = 0;
 		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
 			int tmpLen = Tools.convertHextoDec(name.get(i++));
 			tmpLen += i;
-			/*
+			
 			try {
 				if(tmpLen > name.size()) {
 					throw new Exception("pb de taille de String : " + tmpLen + " > " + name.size() + "hexa : " + name.get(--i) + "\n trame : " + name.toString());
@@ -257,7 +257,7 @@ public class Dns implements ICouches {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-			}*/
+			}
 			
 			
 			
@@ -284,6 +284,7 @@ public class Dns implements ICouches {
 			res = "NS (Name Server Record)";
 			break;
 		
+		
 		case 5 : 
 			res = "CNAME (Canonical Name Record)";
 			break;
@@ -299,7 +300,7 @@ public class Dns implements ICouches {
 		case 16 :
 			res = "TXT (Text Record)";
 		case 28 : 
-			res = "AAA (Host Adress IPv6)";
+			res = "AAAA (Host Adress IPv6)";
 			break;
 		case 41:
 			res = "OPT";
@@ -330,7 +331,7 @@ public class Dns implements ICouches {
 	}
 	
 	public static int rrData(int  oType , int oClass) {
-		int res;
+		int res = 0;
 		
 		switch(oClass) {
 		case 1 : 
@@ -342,7 +343,23 @@ public class Dns implements ICouches {
 			case 28:
 				//class IN type AAAA
 				res = 2;
-			
+			break;
+			case 5:
+				//Cname
+				res = 3;
+				break;
+			case 15:
+				//mail exchange preferece (2) exchange domain name
+				res =4;
+				break;
+			case 2:
+				//NS (authoritative name server)
+				res = 5;
+				break;
+			case 6:
+				//SOA
+				res = 6;
+				break;
 			default :
 				res = 0; 
 				break;
