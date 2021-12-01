@@ -65,12 +65,12 @@ public class Dns implements ICouches {
 			i+= asw.getLength();
 		}
 		
-		
+		/* a finir
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAuthority) ; k++ ) {
 			DnsAuthority auth = new DnsAuthority(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			authority.add(auth);
 			i+= auth.getLength();
-		}
+		}*/
 		
 		/*
 		for(int k = 0 ; k < Tools.convertHextoDec(numberOfAdditionnal) ; k++ ) {
