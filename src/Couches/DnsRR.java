@@ -107,11 +107,55 @@ public class DnsRR implements ICouches {
 				//authoritative name server
 				sb.append("Authoritative Name Server : " + Dns.domainNameRead(rdata)+"\n\t");
 				break;
-			//case 6 : 
-				//SOA   start of a zone of authority
-			//	break;
+			case 6 : 
+				int i = 0;
+				String pNameServer = Dns.domainNameRead(rdata);
+				
+				while(Tools.convertHextoDec(rdata.get(i)) != 0 && i < rdata.size()) {
+					i++;
+				}
+				
+				i++;
+				if(i>= rdata.size()) {
+					sb.append("Error : No '00' byte separating Primary Name server and Responsible authority mail box \n\t");
+					break;
+				}
+				
+				String aMailBox = Dns.domainNameRead(rdata.subList(i, rdata.size()));
+				
+				while(Tools.convertHextoDec(rdata.get(i)) != 0 && i < rdata.size()) {
+					i++;
+				}
+				i++;
+				if(i>= rdata.size()) {
+					sb.append("Error : No '00' byte separating Primary Name server and Responsible authority mail box \n\t");
+					break;
+				}
+				try {
+					String serial = rdata.get(i++) + rdata.get(i++)+  rdata.get(i++) + rdata.get(i++);
+					String refresh = rdata.get(i++) + rdata.get(i++)+  rdata.get(i++) + rdata.get(i++);
+					String retry = rdata.get(i++) + rdata.get(i++)+  rdata.get(i++) + rdata.get(i++);
+					String expire = rdata.get(i++) + rdata.get(i++)+  rdata.get(i++) + rdata.get(i++);
+					String minimum = rdata.get(i++) + rdata.get(i++)+  rdata.get(i++) + rdata.get(i++);
+					
+					
+					sb.append("Primary name server :"+pNameServer +  "\n\t\t");
+					
+					sb.append("Responsible authority's mailbox  :"+aMailBox +  "\n\t\t");
+					sb.append("Serial Number  :"+Tools.convertHextoDec(serial) +  "\n\t\t");
+					sb.append("Refresh Interval  :"+Tools.convertHextoDec(refresh) +  "\n\t\t");
+					sb.append("Retry Interval :"+Tools.convertHextoDec(retry) +  "\n\t\t");
+					sb.append("Expire limit  :"+Tools.convertHextoDec(expire) +  "\n\t\t");
+					sb.append("Minimum TTL   :"+Tools.convertHextoDec(minimum) +  "s\n\t");
+				}catch (Exception e) {
+					// TODO: handle exception
+					sb.append("problem of reading SOA \n\t");
+				}
+				
+				
+				break;
 			default:
-				sb.append("rData format not treated\n\t");
+				sb.append("rData :  format not treated (only treated for A , AAAA, NS , CNAME, MX  )\n\t");
 				break;
 			}
 		}

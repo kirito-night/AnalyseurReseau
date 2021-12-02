@@ -49,7 +49,11 @@ public class DnsQuestion implements ICouches{
 		
 		sb.append("Name : " +qName+ "\n\t\t");
 		sb.append("[Name Length : " + qName.length()+ "]\n\t\t");
-		sb.append("[Label count : "+ qName.split(".").length +"] \n\t\t" ); // a voir si c'est 3 ou non 
+		
+		
+		
+
+		sb.append("[Label count : "+ qName.split("\\.").length +"] \n\t\t" ); // a voir si c'est 3 ou non 
 		int type = Tools.convertHextoDec(qType);
 		
 		sb.append("Type : " + Dns.typeAnalyse(type)+ "(" +type+ ")\n\t\t" );

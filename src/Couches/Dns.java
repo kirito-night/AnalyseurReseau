@@ -249,18 +249,11 @@ public class Dns implements ICouches {
 			int tmpLen = Tools.convertHextoDec(name.get(i++));
 			tmpLen += i;
 			
-			try {
-				if(tmpLen > name.size()) {
-					throw new Exception("pb de taille de String : " + tmpLen + " > " + name.size() + "hexa : " + name.get(--i) + "\n trame : " + name.toString());
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-				return "problem of domain name read";
-				
+			
+			if(tmpLen > name.size()) {
+				return "problem of domainn name read";
 			}
+			
 			
 			
 			
@@ -280,7 +273,7 @@ public class Dns implements ICouches {
 		String res; 
 		switch (type) {
 		case 1: {
-			res = "A (Host Adress)";
+			res = "A (Host Address)";
 			break;
 		}
 		case 2 : 
@@ -359,9 +352,9 @@ public class Dns implements ICouches {
 				//NS (authoritative name server)
 				res = 5;
 				break;
-			case 6:
+			case 6 : 
 				//SOA
-				res = 6;
+				res = 6 ;
 				break;
 			default :
 				res = 0; 
