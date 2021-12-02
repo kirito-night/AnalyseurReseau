@@ -255,8 +255,11 @@ public class Dns implements ICouches {
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 				System.out.println(e.getMessage());
+				return "problem of domain name read";
+				
 			}
 			
 			

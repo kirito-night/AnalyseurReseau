@@ -55,26 +55,30 @@ Domain Name System :
 	Queries 
 		Name : connectivity-check.ubuntu.com
 		[Name Length : 29]
+		[Label count : 0] 
 		Type : A (Host Adress)(1)
 		Class : (0x0001)Internet (IN)
-	Answers  
+	Answer
 		Name : connectivity-check.ubuntu.com
 		Type : A (Host Adress)(1)
 		Class : (0x0001)Internet (IN)
 		TTL : 570s
-		Data Length : 8
-		Answers  
+		Data Length : 4
+		Address : 35.232.111.17
+	Answer
 		Name : connectivity-check.ubuntu.com
 		Type : A (Host Adress)(1)
 		Class : (0x0001)Internet (IN)
 		TTL : 570s
-		Data Length : 8
-		Additionnel  
+		Data Length : 4
+		Address : 35.224.170.84
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x04c4)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
 0000  90 61 ae 7c c9 96 b8 66 85 9a b1 0c 08 00 45 80
 0010  00 8b fa 5b 40 00 40 11 bb 24 c0 a8 01 fe c0 a8
@@ -134,26 +138,30 @@ Domain Name System :
 	Queries 
 		Name : mozilla.cloudflare-dns.com
 		[Name Length : 26]
-		Type : AAA (Host Adress IPv6)(28)
+		[Label count : 0] 
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
-	Answers  
+	Answer
 		Name : mozilla.cloudflare-dns.com
-		Type : AAA (Host Adress IPv6)(28)
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
 		TTL : 243s
-		Data Length : 32
-		Answers  
+		Data Length : 16
+		AAAA Address : 2606:4700::6810:f8f9
+	Answer
 		Name : mozilla.cloudflare-dns.com
-		Type : AAA (Host Adress IPv6)(28)
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
 		TTL : 243s
-		Data Length : 32
-		Additionnel  
+		Data Length : 16
+		AAAA Address : 2606:4700::6810:f9f9
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x04c4)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
 0000  90 61 ae 7c c9 96 b8 66 85 9a b1 0c 08 00 45 80
 0010  00 93 37 52 40 00 40 11 7e 26 c0 a8 01 fe c0 a8
@@ -214,20 +222,23 @@ Domain Name System :
 	Queries 
 		Name : connectivity-check.ubuntu.com
 		[Name Length : 29]
-		Type : AAA (Host Adress IPv6)(28)
+		[Label count : 0] 
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
-	Authority   
+	Authority
 		Name : ubuntu.com
 		Type : SOA (Start Of Authority Record)(6)
 		Class : (0x0001)Internet (IN)
 		TTL : 45s
-		Data Length : 98
-		Additionnel  
+		Data Length : 49
+		rData format not treated
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x04c4)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
 0000  90 61 ae 7c c9 96 b8 66 85 9a b1 0c 08 00 45 80
 0010  00 93 37 56 40 00 40 11 7e 22 c0 a8 01 fe c0 a8
@@ -288,20 +299,23 @@ Domain Name System :
 	Queries 
 		Name : connectivity-check.ubuntu.com
 		[Name Length : 29]
-		Type : AAA (Host Adress IPv6)(28)
+		[Label count : 0] 
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
-	Authority   
+	Authority
 		Name : ubuntu.com
 		Type : SOA (Start Of Authority Record)(6)
 		Class : (0x0001)Internet (IN)
 		TTL : 16s
-		Data Length : 98
-		Additionnel  
+		Data Length : 49
+		rData format not treated
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x04c4)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
 0000  90 61 ae 7c c9 96 b8 66 85 9a b1 0c 08 00 45 80
 0010  00 a5 37 5c 40 00 40 11 7e 0a c0 a8 01 fe c0 a8
@@ -363,20 +377,23 @@ Domain Name System :
 	Queries 
 		Name : connectivity-check.ubuntu.com.lan
 		[Name Length : 33]
-		Type : AAA (Host Adress IPv6)(28)
+		[Label count : 0] 
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
-	Authority   
+	Authority
 		Name : <Root>
 		Type : SOA (Start Of Authority Record)(6)
 		Class : (0x0001)Internet (IN)
 		TTL : 204s
-		Data Length : 128
-		Additionnel  
+		Data Length : 64
+		rData format not treated
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x04c4)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
 0000  b8 66 85 9a b1 0c 90 61 ae 7c c9 96 08 00 45 00
 0010  00 4f e8 12 40 00 40 11 ce 29 c0 a8 01 13 c0 a8
@@ -432,7 +449,8 @@ Domain Name System :
 	Queries 
 		Name : connectivity-check.ubuntu.com.lan
 		[Name Length : 33]
-		Type : AAA (Host Adress IPv6)(28)
+		[Label count : 0] 
+		Type : AAAA (Host Adress IPv6)(28)
 		Class : (0x0001)Internet (IN)
 	
 0000  b8 66 85 9a b1 0c 90 61 ae 7c c9 96 08 00 45 00
@@ -490,12 +508,14 @@ Domain Name System :
 	Queries 
 		Name : mozilla.cloudflare-dns.com
 		[Name Length : 26]
+		[Label count : 0] 
 		Type : A (Host Adress)(1)
 		Class : (0x0001)Internet (IN)
-	Additionnel  
+	Additional
 		Name : <Root>
 		Type : OPT(41)
 		Class : (0x0200)unassiagned or reserved
 		TTL : 0s
 		Data Length : 0
+		
 	
