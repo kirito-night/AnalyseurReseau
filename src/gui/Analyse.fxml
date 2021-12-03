@@ -36,14 +36,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="837.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController" >
+<VBox prefHeight="837.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
@@ -51,7 +51,6 @@
           <items>
             <MenuItem fx:id="open" mnemonicParsing="false" onAction="#openFileOnClick" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem fx:id="close" mnemonicParsing="false" onAction="#closeFileOnClick" text="Close" />
             <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveAnalyseOnClick" text="Save" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#quitProgramOnclick" text="Quit" />
@@ -73,17 +72,18 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <SplitPane dividerPositions="0.2991304347826087" layoutX="162.0" layoutY="127.0" prefHeight="474.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5" layoutX="162.0" layoutY="127.0" prefHeight="474.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TextArea fx:id="trameBrut" disable="true" prefHeight="472.0" prefWidth="341.0" text="veuillez sélectionner une trame " AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children></AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                           <children>
-                              <TextArea fx:id="trameAnalysed" disable="true" prefHeight="472.0" prefWidth="803.0" text="veuillez sélectionner une trame" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              <ScrollBar layoutX="782.0" layoutY="6.0" orientation="VERTICAL" prefHeight="460.0" prefWidth="15.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="782.0" AnchorPane.topAnchor="6.0" />
-                           </children></AnchorPane>
+                        <TextArea fx:id="trameBrut" editable="false" prefHeight="472.0" prefWidth="341.0" text="veuillez sélectionner une trame ">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextArea>
+                        <TextArea fx:id="trameAnalysed" editable="false" prefHeight="472.0" prefWidth="803.0" text="veuillez sélectionner une trame">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextArea>
                     </items>
                   </SplitPane>
                </children>
