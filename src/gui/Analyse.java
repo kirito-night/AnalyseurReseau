@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Analyse extends Application{
 	@Override public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Analyse.class.getResource("gui.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Analyse.class.getResource("Analyse.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         MainController controller = fxmlLoader.getController();
         controller.setStage(stage);
@@ -22,6 +22,6 @@ public class Analyse extends Application{
     }
 	
 	public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

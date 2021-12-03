@@ -83,7 +83,7 @@ public class MainController {
         
         try {
 			lTrame =  Trame.generateListTrame(f1.getMapTrames());
-			listTrame = new ListView<>();
+			// listTrame = new ListView<>();
 			
 			ObservableList<Trame> items = FXCollections.observableArrayList(lTrame);
 			
