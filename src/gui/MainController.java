@@ -96,7 +96,7 @@ public class MainController {
 				public void changed(ObservableValue<? extends Trame> arg0, Trame arg1, Trame arg2) {
 					String[] result= arg2.resultattAnalyse();
 					StringBuilder sb = new StringBuilder();
-					for(int i = 1 ; 1 < result.length ; i++) {
+					for(int i = 1 ; i < result.length ; i++) {
 						sb.append(result[i]);
 					}
 					
