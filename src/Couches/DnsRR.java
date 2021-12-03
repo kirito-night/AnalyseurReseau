@@ -166,7 +166,9 @@ public class DnsRR implements ICouches {
 	
 	
 	public String findName() throws Exception {
+		
 		String binName = Tools.convertHextoBin(name);
+		
 		String offset  =binName.substring(2,binName.length());
 		int ptr = Tools.convertBintoDec(offset);
 		return Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
@@ -174,6 +176,11 @@ public class DnsRR implements ICouches {
 		
 		
 		
+	}
+	
+	public String findName(List<String> rdata) {
+		
+		return "";
 	}
 	
 

@@ -51,7 +51,7 @@ public class Trame {
 		this.couches = couches;
 	}
 
-	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame) throws Exception {
+	public static List<Trame> generateListTrame(Map<Integer, List<String>> mapTrame) throws Exception  {
 		List<Trame> res = new ArrayList<>();
 		for(Map.Entry<Integer, List<String>> entry : mapTrame.entrySet()) {
 			Trame currentTrame = new Trame(entry.getKey(), entry.getValue());
@@ -149,8 +149,8 @@ public class Trame {
 		}
 		
 		
-		throw new Exception("unable to analyse ethernet type");
-		
+		//throw new Exception("unable to analyse ethernet type");
+		return;
 	}
 	
 	public String[] resultattAnalyse() {
@@ -193,6 +193,12 @@ public class Trame {
 		//return String.join(" ", list);
 		return sb.toString();
 	}
+
+	@Override
+	public String toString() {
+		return "Trame : " + numTrame ;
+	}
+	
 	
 	
 }
