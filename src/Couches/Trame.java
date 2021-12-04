@@ -9,6 +9,11 @@ public class Trame {
 	private List<String> trame;
 	private List<ICouches> couches;
 	
+	private String src = "untreated";
+	private String dest = "untreated"; 
+	private int  length;
+	private String protocol = "untreated";
+	
 	
 	public Trame(Integer numTrame, List<String> trame) throws Exception {
 		this.numTrame = numTrame;
@@ -17,6 +22,7 @@ public class Trame {
 		couches = new ArrayList<>();
 		//analyseCouche();
 		
+		length = this.trame.size();
 		
 		try {
 			analyseCouche();
@@ -95,13 +101,15 @@ public class Trame {
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0800")) {
 			Ip  ip = (Ip) analyseIP(e.getData());
 			couches.add(ip);
+			this.src = ip.getSrcIpAdress();
+			this.dest = ip.getDestIpAdress();
 			String proto = ip.getProtocol();
 			switch(Tools.convertHextoDec(proto)) {
 				case 17 :
 					//UDP
 					Udp udp = (Udp) analyseUDP(ip.getData());
 					couches.add(udp);
-					
+					this.protocol ="UDP";
 					String srcPort = udp.getSrcPort();
 					String destPort = udp.getDestPort();
 					int choose =0 ; 
@@ -116,13 +124,16 @@ public class Trame {
 					case 1: {
 						Dhcp dhcp = (Dhcp) analyseDHCP(udp);
 						couches.add(dhcp);
+						this.protocol = "DHCP";
 						break;
 					}
 					case 2 : //dns
 						Dns dns =(Dns) analyseDNS(udp);
 						couches.add(dns);
+						this.protocol = "DNS";
 						break;
 					default:
+						
 						throw new IllegalArgumentException("Unexpected value: " + choose);
 					}
 					
@@ -132,11 +143,14 @@ public class Trame {
 					break;
 				case 1 :
 					//ICMP
+					this.protocol = "ICMP";
 					break;
 				case 6 :
 					//TCP
+					this.protocol = "TCP";
 					break;
 				default: 
+					this.protocol = "unknown";
 					throw new Exception("unable to analyse protocol");
 			}
 			return;
@@ -145,6 +159,9 @@ public class Trame {
 		
 		if(Tools.convertHextoDec(e.getType()) == Tools.convertHextoDec("0806")) {
 			//analyse ARP non obligatoire 
+			this.src = e.getSrcMac();
+			this.dest = e.getDestMac();
+			
 			return;
 		}
 		
@@ -196,7 +213,7 @@ public class Trame {
 
 	@Override
 	public String toString() {
-		return "Trame : " + numTrame ;
+		return "Trame : " + numTrame + "  Source : "+ src +"  Destination : " + dest + "  Length : " + length + "  Protocol : " + protocol  ;
 	}
 	
 	

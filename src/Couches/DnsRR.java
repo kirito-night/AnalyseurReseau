@@ -109,24 +109,38 @@ public class DnsRR implements ICouches {
 				break;
 			case 6 : 
 				int i = 0;
-				String pNameServer = Dns.domainNameRead(rdata);
+				//String pNameServer = Dns.domainNameRead(rdata);
 				
-				while(Tools.convertHextoDec(rdata.get(i)) != 0 && i < rdata.size()) {
+				String pNameServer = findName(rdata);
+				
+				while(Tools.convertHextoDec(rdata.get(i)) != 0 && Tools.convertBintoDec( Tools.convertHextoBin(rdata.get(i)).substring(0, 2)) != Tools.convertBintoDec("11")  && i < rdata.size()) {
 					i++;
 				}
 				
-				i++;
+				
+				if(Tools.convertHextoDec(rdata.get(i) ) == 0) {
+					i++;
+				}else {
+					i+=2;
+				}
+				
 				if(i>= rdata.size()) {
 					sb.append("Error : No '00' byte separating Primary Name server and Responsible authority mail box \n\t");
 					break;
 				}
 				
-				String aMailBox = Dns.domainNameRead(rdata.subList(i, rdata.size()));
-				
-				while(Tools.convertHextoDec(rdata.get(i)) != 0 && i < rdata.size()) {
+				//String aMailBox = Dns.domainNameRead(rdata.subList(i, rdata.size()));
+				String aMailBox = findName(rdata);
+				while(Tools.convertHextoDec(rdata.get(i)) != 0 && Tools.convertBintoDec( Tools.convertHextoBin(rdata.get(i)).substring(0, 2)) != Tools.convertBintoDec("11")  && i < rdata.size()) {
 					i++;
 				}
-				i++;
+				
+				
+				if(Tools.convertHextoDec(rdata.get(i) ) == 0) {
+					i++;
+				}else {
+					i+=2;
+				}
 				if(i>= rdata.size()) {
 					sb.append("Error : No '00' byte separating Primary Name server and Responsible authority mail box \n\t");
 					break;
@@ -179,8 +193,19 @@ public class DnsRR implements ICouches {
 	}
 	
 	public String findName(List<String> rdata) {
+		int i = 0;
+		String tmpLen = rdata.get(i);
+		String binTmp = Tools.convertHextoBin(tmpLen);
+		String pref = binTmp.substring(0,2);
 		
-		return "";
+		if(Tools.convertBintoDec(pref) == Tools.convertBintoDec("11")) {
+			i++;
+			binTmp += Tools.convertHextoBin(rdata.get(i));
+			String off =  binTmp.substring(2,binTmp.length()) ;
+			int ptr = Tools.convertHextoDec(off);
+			return Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+		}
+		return Dns.domainNameRead(rdata);
 	}
 	
 

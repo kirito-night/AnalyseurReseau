@@ -67,7 +67,7 @@ Domain Name System :
 		TTL : 143s
 		Data Length : 64
 		Primary name server :a.root-servers.net
-		Responsible authority's mailbox  :nstld.verisign-grs.com
+		Responsible authority's mailbox  :a.root-servers.net
 		Serial Number  :2021112700
 		Refresh Interval  :1800
 		Retry Interval :900
@@ -309,7 +309,13 @@ Domain Name System :
 		Class : (0x0001)Internet (IN)
 		TTL : 45s
 		Data Length : 49
-		problem of reading SOA 
+		Primary name server :problem of domainn name read
+		Responsible authority's mailbox  :problem of domainn name read
+		Serial Number  :2018054711
+		Refresh Interval  :10800
+		Retry Interval :3600
+		Expire limit  :604800
+		Minimum TTL   :3600s
 	Additional
 		Name : <Root>
 		Type : OPT(41)
@@ -387,7 +393,13 @@ Domain Name System :
 		Class : (0x0001)Internet (IN)
 		TTL : 16s
 		Data Length : 49
-		problem of reading SOA 
+		Primary name server :problem of domainn name read
+		Responsible authority's mailbox  :problem of domainn name read
+		Serial Number  :2018054711
+		Refresh Interval  :10800
+		Retry Interval :3600
+		Expire limit  :604800
+		Minimum TTL   :3600s
 	Additional
 		Name : <Root>
 		Type : OPT(41)
@@ -467,7 +479,7 @@ Domain Name System :
 		TTL : 204s
 		Data Length : 64
 		Primary name server :a.root-servers.net
-		Responsible authority's mailbox  :nstld.verisign-grs.com
+		Responsible authority's mailbox  :a.root-servers.net
 		Serial Number  :2021112700
 		Refresh Interval  :1800
 		Retry Interval :900

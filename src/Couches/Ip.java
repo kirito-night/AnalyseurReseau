@@ -199,6 +199,18 @@ public class Ip implements ICouches {
 	}
 	
 	
+	public String getSrcIpAdress() {
+		return srcIpAdress;
+	}
+	public void setSrcIpAdress(String srcIpAdress) {
+		this.srcIpAdress = srcIpAdress;
+	}
+	public String getDestIpAdress() {
+		return destIpAdress;
+	}
+	public void setDestIpAdress(String destIpAdress) {
+		this.destIpAdress = destIpAdress;
+	}
 	public List<String> getData() {
 		return data;
 	}
