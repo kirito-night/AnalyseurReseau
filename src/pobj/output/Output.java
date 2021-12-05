@@ -14,12 +14,15 @@ public class Output {
 			
 			PrintWriter pw = new PrintWriter(fw, false);
 			System.out.println(res);
-			pw.print(res);
+			pw.write(res);
 			
 			pw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("problem d'ouverture du fichier");
+		}catch(Exception e1){
+			e1.printStackTrace();
 			System.out.println("problem d'ouverture du fichier");
 		}
 	}

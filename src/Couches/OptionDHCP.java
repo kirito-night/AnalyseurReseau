@@ -36,11 +36,79 @@ public class OptionDHCP implements ICouches{
 				String sad = Tools.convertHextoDec(option.get(0))+ "." +Tools.convertHextoDec(option.get(1))+ "." +Tools.convertHextoDec(option.get(2))+ "."+ Tools.convertHextoDec(option.get(3));
 				sb.append("Subnet Mask : " + sad + "\n\t");
 				break;
+			case 2:
+				sb.append("Option : (2) Time Offset \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Time Offset : 0x"+String.join("", option)+"\n\t");
+				break;
+			case 3: 
+				sb.append("Option : (3) Router Option \n\t\t");
+				int l1 = Tools.convertHextoDec(length);
+				if(l1 % 4 != 0 ) {
+					sb.append("problem of Router Option read \n\t");
+					
+				}else {
+					sb.append("Length : " +  l1 +"\n\t\t");
+					sb.append("Router Option : \n\t\t");
+					int i = 0;
+					while (i < option.size()) {
+						String addr = Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "."+ Tools.convertHextoDec(option.get(i++));
+						sb.append("\t "+ addr+"\n\t");
+					}
+					
+				}
+				
+				break;
+			case 4 : 
+				
+				sb.append("Option : (4) Time Server Option \n\t\t");
+				int l3 = Tools.convertHextoDec(length);
+				if(l3 % 4 != 0 ) {
+					sb.append("problem of Time Server Option read \n\t");
+					
+				}else {
+					sb.append("Length : " +  l3 +"\n\t\t");
+					sb.append("Time Server Option : \n\t\t");
+					int i = 0;
+					while (i < option.size()) {
+						String addr = Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "."+ Tools.convertHextoDec(option.get(i++));
+						sb.append("\t "+ addr+"\n\t");
+					}
+					
+				}
+				
+				
+				
+				break;
+			case 6: 
+				sb.append("Option : (6) Domain Name Server Option  \n\t\t");
+				int l2 = Tools.convertHextoDec(length);
+				if(l2 % 4 != 0 ) {
+					sb.append("problem of Domain Name Server Option read \n\t");
+					
+				}else {
+					sb.append("Length : " +  l2 +"\n\t\t");
+					sb.append("Domain Name Server Option : \n\t\t");
+					int i = 0;
+					while (i < option.size()) {
+						String addr = Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "."+ Tools.convertHextoDec(option.get(i++));
+						sb.append("\t "+ addr+"\n\t");
+					}
+					
+				}
+				
+				break;
+			
 			case 12 : 
 				sb.append("Option : (12)  Host Name Option \n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String hName = String.join(" ",option);
 				sb.append("Host Name Option : " + Tools.hexToASCII(hName)+"\n\t");
+				break;
+			case 15 :
+				sb.append("Option : (15) Domain Name  \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Domain Name : " + Dns.domainNameRead(option)+ "\n\t" );
 				break;
 				
 			case 19 :
@@ -172,7 +240,7 @@ public class OptionDHCP implements ICouches{
 					sb.append("DHCP : Inform (8)" +"\n\t");
 					break;
 				default:
-					throw new IllegalArgumentException("Unexpected value: " + option.get(0)+"\n\t");
+					sb.append("Unexpected value: " + option.get(0)+"\n\t");
 				}
 				
 				break;
@@ -244,6 +312,7 @@ public class OptionDHCP implements ICouches{
 				break;
 			default :
 				sb.append("unable analyse option : " +  Tools.convertHextoDec(tag)+"\n\t");
+				sb.append("Length : " + Tools.convertHextoDec(length) + "\n\t\t");
 		}
 		
 		return sb.toString();

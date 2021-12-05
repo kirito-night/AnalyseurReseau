@@ -56,11 +56,6 @@
             <MenuItem fx:id="quit" mnemonicParsing="false" onAction="#quitProgramOnclick" text="Quit" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
       </menus>
     </MenuBar>
       <SplitPane dividerPositions="0.40974212034383956" orientation="VERTICAL" prefHeight="1000.0" prefWidth="1250.0">

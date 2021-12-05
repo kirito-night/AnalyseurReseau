@@ -72,16 +72,18 @@ public class MainController {
 
     @FXML
     void openFileOnClick(ActionEvent event) {
-    	FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Network Frame File");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txt", "*.txt"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
-        File packetFile = fileChooser.showOpenDialog(stage);
-        FileReader f1 = new FileReader(packetFile);
+    	
         
         
         
         try {
+        	
+        	FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Open Network Frame File");
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txt", "*.txt"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*"));
+            File packetFile = fileChooser.showOpenDialog(stage);
+            FileReader f1 = new FileReader(packetFile);
 			lTrame =  Trame.generateListTrame(f1.getMapTrames());
 			// listTrame = new ListView<>();
 			
@@ -111,6 +113,7 @@ public class MainController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("problem d'ouverture de la trame ");
 		}
         
         
@@ -123,21 +126,35 @@ public class MainController {
 
     @FXML
     void saveAnalyseOnClick(ActionEvent event) {
-    	FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save...");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txt", "*.txt"),
-                new FileChooser.ExtensionFilter("All Files", "*.*"));
-        File exportFile = fileChooser.showSaveDialog(stage);
-        StringBuilder sb = new StringBuilder();
-        
-        for(Trame t : lTrame) {
-        	String[] result = t.resultattAnalyse();
-        	String res = String.join("", result);
-        	sb.append(res);
-        	
-        }
-        
-        Output.outputStream(sb.toString(), exportFile);
+    	
+    	
+    	try {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Save...");
+			fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("txt", "*.txt"),
+			        new FileChooser.ExtensionFilter("All Files", "*.*"));
+			File exportFile = fileChooser.showSaveDialog(stage);
+			
+			if (exportFile == null) {
+				throw new Exception("pas de fichier choisit");
+			}
+			
+			StringBuilder sb = new StringBuilder();
+			
+			for(Trame t : lTrame) {
+				String[] result = t.resultattAnalyse();
+				String res = String.join("", result);
+				sb.append(res);
+				
+			}
+			
+			Output.outputStream(sb.toString(), exportFile);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.print("problem de sauvegarde : ");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
     }
 
 }
