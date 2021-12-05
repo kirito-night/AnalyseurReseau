@@ -130,7 +130,7 @@ public class Ip implements ICouches {
 						//no operation 
 						break;
 					case 7 :
-						sb.append("Recourd Route (1)\n\t");
+						sb.append("Recourd Route (7)\n\t");
 						//recourd route
 						break;
 					case 68 :

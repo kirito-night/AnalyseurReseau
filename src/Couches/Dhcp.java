@@ -122,7 +122,7 @@ public class Dhcp implements ICouches {
 	public String analyse() {
 		// TODO Auto-generated method stub
 		StringBuilder sb = new StringBuilder();
-		sb.append("Dnymamic Host Configuration : \n\t");
+		sb.append("Dnymamic Host Configuration Protocol : \n\t");
 		sb.append("Message type : ");
 		if(Tools.convertHextoDec(opcode)==Tools.convertHextoDec("01")) {
 			sb.append("Boot Request (1)\n\t");

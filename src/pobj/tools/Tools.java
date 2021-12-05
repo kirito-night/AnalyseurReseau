@@ -81,6 +81,7 @@ public class Tools {
 	
 	public static void main(String[] args){
 		System.out.println(convertHextoDec("86DD"));
+		System.out.println(convertBintoDec("11"));
 		/*
 		System.out.println(convertHextoBin("0000"));
 		System.out.println(convertHextoBin("aaaa"));

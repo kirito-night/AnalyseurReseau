@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="837.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+<VBox prefHeight="1000.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
@@ -63,7 +63,7 @@
         </Menu>
       </menus>
     </MenuBar>
-      <SplitPane dividerPositions="0.40974212034383956" orientation="VERTICAL" prefHeight="847.0" prefWidth="1154.0">
+      <SplitPane dividerPositions="0.40974212034383956" orientation="VERTICAL" prefHeight="1000.0" prefWidth="1250.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="516.0" prefWidth="989.0">
                <children>

@@ -247,6 +247,8 @@ public class Dns implements ICouches {
 		int i = 0;
 		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
 			int tmpLen = Tools.convertHextoDec(name.get(i++));
+			
+			
 			tmpLen += i;
 			
 			

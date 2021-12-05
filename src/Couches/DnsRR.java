@@ -1,5 +1,6 @@
 package Couches;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pobj.tools.Tools;
@@ -192,8 +193,8 @@ public class DnsRR implements ICouches {
 		
 	}
 	
-	public String findName(List<String> rdata) {
-		int i = 0;
+	public String findName(List<String> name) {
+		/*int i = 0;
 		String tmpLen = rdata.get(i);
 		String binTmp = Tools.convertHextoBin(tmpLen);
 		String pref = binTmp.substring(0,2);
@@ -203,9 +204,53 @@ public class DnsRR implements ICouches {
 			binTmp += Tools.convertHextoBin(rdata.get(i));
 			String off =  binTmp.substring(2,binTmp.length()) ;
 			int ptr = Tools.convertHextoDec(off);
-			return Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+			String ptrRead =  Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
 		}
-		return Dns.domainNameRead(rdata);
+		return Dns.domainNameRead(rdata);*/
+		
+		
+		List<String> list = new ArrayList<>();
+		int i = 0;
+		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
+			String tmp = name.get(i);
+			String binTmp = Tools.convertHextoBin(tmp);
+			String pref = binTmp.substring(0,2);
+			if(Tools.convertBintoDec(pref) == 3 ) {
+				i++;
+				tmp +=name.get(i);
+				binTmp = Tools.convertHextoBin(tmp);
+				String off =  binTmp.substring(2,binTmp.length()) ;
+				int ptr = Tools.convertBintoDec(off);
+				String pointedName = Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+				list.add(pointedName);
+				break;
+			}
+			
+			int tmpLen = Tools.convertHextoDec(name.get(i++));
+			
+			
+			tmpLen += i;
+			
+			
+			if(tmpLen > name.size()) {
+				return "problem of domainn name read";
+			}
+			
+			
+			
+			
+			String str = String.join("", name.subList(i, tmpLen));
+			String elem = Tools.hexToASCII(str);
+			list.add(elem);
+			i = tmpLen;
+			
+		}
+		
+		String res = String.join(".", list);
+		
+		return res ;
+		
+		
 	}
 	
 
