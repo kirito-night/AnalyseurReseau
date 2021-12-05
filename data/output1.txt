@@ -309,8 +309,8 @@ Domain Name System :
 		Class : (0x0001)Internet (IN)
 		TTL : 45s
 		Data Length : 49
-		Primary name server :problem of domainn name read
-		Responsible authority's mailbox  :problem of domainn name read
+		Primary name server :ns1.canonical.com
+		Responsible authority's mailbox  :ns1.canonical.com
 		Serial Number  :2018054711
 		Refresh Interval  :10800
 		Retry Interval :3600
@@ -393,8 +393,8 @@ Domain Name System :
 		Class : (0x0001)Internet (IN)
 		TTL : 16s
 		Data Length : 49
-		Primary name server :problem of domainn name read
-		Responsible authority's mailbox  :problem of domainn name read
+		Primary name server :ns1.canonical.com
+		Responsible authority's mailbox  :ns1.canonical.com
 		Serial Number  :2018054711
 		Refresh Interval  :10800
 		Retry Interval :3600
