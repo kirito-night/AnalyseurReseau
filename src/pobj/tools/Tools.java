@@ -1,8 +1,8 @@
 package pobj.tools;
 
-import static org.junit.Assert.assertEquals;
 
-import java.math.BigInteger;
+
+
 
 public class Tools {
 	public static int convertHextoDec(String hex) {
@@ -78,16 +78,16 @@ public class Tools {
 	}
 	
 	
-	
+	/*
 	public static void main(String[] args){
 		System.out.println(convertHextoDec("86DD"));
 		System.out.println(convertBintoDec("11"));
-		/*
+		
 		System.out.println(convertHextoBin("0000"));
 		System.out.println(convertHextoBin("aaaa"));
 		System.out.println(convertBintoDec("11111111"));
 		System.out.println(hexToASCII("630063"));
-		assertEquals("\0\0", hexToASCII("0000"));*/
+		assertEquals("\0\0", hexToASCII("0000"));
 		
-	}
+	}*/
 }

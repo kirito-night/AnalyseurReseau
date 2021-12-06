@@ -15,7 +15,7 @@ public class DnsQuestion implements ICouches{
 		getChamp(trame);
 	}
 	private void getChamp(List<String> trame) throws Exception {
-		StringBuilder sb = new StringBuilder();
+		//StringBuilder sb = new StringBuilder();
 		int i = 0;
 		/*while(Tools.convertHextoDec(trame.get(i)) != 0 && i < trame.size()) {
 			sb.append(trame.get(i));

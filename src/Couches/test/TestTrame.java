@@ -1,6 +1,7 @@
-package testCouches;
+package Couches.test;
 import java.io.File;
-import java.io.IOException;
+
+
 import java.util.List;
 
 import Couches.Trame;
@@ -8,7 +9,7 @@ import pobj.lecture.FileReader;
 import pobj.output.Output;
 public class TestTrame {
 	public static void main(String[] argrs) throws Exception {
-		FileReader f1 = new FileReader("data/dns.txt");
+		FileReader f1 = new FileReader("data/dhcpPacket.txt");
 		
 		List<Trame> listTrame = Trame.generateListTrame(f1.getMapTrames());
 		StringBuilder sb = new StringBuilder();

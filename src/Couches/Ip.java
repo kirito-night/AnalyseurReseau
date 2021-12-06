@@ -113,9 +113,9 @@ public class Ip implements ICouches {
 	public String getProtocol() {
 		return protocol;
 	}
-	private void setProtocol(String protocol) {
+	/*private void setProtocol(String protocol) {
 		this.protocol = protocol;
-	}
+	}*/
 	public String analyse() {
 		StringBuilder sb = analysePartieFixe();
 		if(enteteIP.size() == 60) {

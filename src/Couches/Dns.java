@@ -1,6 +1,6 @@
 package Couches;
 
-import static org.junit.Assert.assertEquals;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Dns implements ICouches {
 	
 	
 	private List<String> enteteDNS;
-	private List<String> data;
+	//private List<String> data;
 	
 	
 	public Dns(Udp udp) throws Exception {
@@ -38,7 +38,7 @@ public class Dns implements ICouches {
 		}*/
 		
 		enteteDNS = trame.subList(0, Tools.convertHextoDec(udp.getLength())- 8);
-		data = trame.subList(Tools.convertHextoDec(udp.getLength())-8, trame.size());
+		//data = trame.subList(Tools.convertHextoDec(udp.getLength())-8, trame.size());
 		int i =0; 
 		identification = enteteDNS.get(i++) + enteteDNS.get(i++); 
 		flags = enteteDNS.get(i++) + enteteDNS.get(i++); 
@@ -205,7 +205,7 @@ public class Dns implements ICouches {
 			break;
 		}
 		
-		sb.append(".... .... .0.. .... = Z : reserved (0)");
+		sb.append(".... .... .0.. .... = Z : reserved("+z+")\n\t\t");
 		
 		switch (Tools.convertHextoDec(ad)) {
 		case 0:
@@ -253,7 +253,7 @@ public class Dns implements ICouches {
 			
 			
 			if(tmpLen > name.size()) {
-				return "problem of domainn name read";
+				return "problem of domain name read" + name.get(i);
 			}
 			
 			

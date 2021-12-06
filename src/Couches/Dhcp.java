@@ -31,7 +31,7 @@ public class Dhcp implements ICouches {
 	
 	private List<String> enteteDHCP ; 
 	
-	private List<String> data;
+	//private List<String> data;
 	
 	public Dhcp(Udp udp) throws Exception {
 		this.udp = udp;
@@ -212,7 +212,7 @@ public class Dhcp implements ICouches {
 		}else {
 			sb.append("Boot file name : " + Tools.hexToASCII(bootFileName) + "\n\t");
 		}
-		sb.append("Magic cookie : DHCP\n\t");
+		sb.append("Magic cookie : DHCP (0x" + magicCookie  + ")\n\t");
 		for(OptionDHCP op : options) {
 			sb.append(op.analyse());
 		}

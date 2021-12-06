@@ -1,8 +1,9 @@
 package Couches;
 
+
 import java.util.List;
 
-import javax.tools.Tool;
+
 
 import pobj.tools.Tools;
 
@@ -81,7 +82,7 @@ public class OptionDHCP implements ICouches{
 				
 				break;
 			case 6: 
-				sb.append("Option : (6) Domain Name Server Option  \n\t\t");
+				sb.append("Option : (6) Domain Name Server\n\t\t");
 				int l2 = Tools.convertHextoDec(length);
 				if(l2 % 4 != 0 ) {
 					sb.append("problem of Domain Name Server Option read \n\t");
@@ -98,17 +99,39 @@ public class OptionDHCP implements ICouches{
 				}
 				
 				break;
+			case 7 :
+				sb.append("Option : (7) Log Server Option  \n\t\t");
+				int l4 = Tools.convertHextoDec(length);
+				if(l4 % 4 != 0 ) {
+					sb.append("problem of Log Server Option read \n\t");
+					
+				}else {
+					sb.append("Length : " +  l4+"\n\t\t");
+					sb.append("Log Server Option : \n\t\t");
+					int i = 0;
+					while (i < option.size()) {
+						String addr = Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "." +Tools.convertHextoDec(option.get(i++))+ "."+ Tools.convertHextoDec(option.get(i++));
+						sb.append("\t "+ addr+"\n\t");
+					}
+					
+				}
+				
+				
+				break;
 			
 			case 12 : 
 				sb.append("Option : (12)  Host Name Option \n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String hName = String.join(" ",option);
 				sb.append("Host Name Option : " + Tools.hexToASCII(hName)+"\n\t");
+				//sb.append("Host Name Option : " +Dns.domainNameRead(option)+"\n\t");
 				break;
 			case 15 :
 				sb.append("Option : (15) Domain Name  \n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
-				sb.append("Domain Name : " + Dns.domainNameRead(option)+ "\n\t" );
+				
+				
+				sb.append("Domain Name : " + Tools.hexToASCII(String.join("", option)) + "\n\t" );
 				break;
 				
 			case 19 :
@@ -191,7 +214,7 @@ public class OptionDHCP implements ICouches{
 				sb.append("Option : (51) Ip Address Lease Time \n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String leasteTime = String.join("",option);
-				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime)+"\n\t");
+				sb.append("Lease Time  : " + Tools.convertHextoDec(leasteTime)+"s\n\t");
 				break;
 				
 			case 52:
@@ -274,7 +297,7 @@ public class OptionDHCP implements ICouches{
 				sb.append("Option : (57) Maximum DHCP Message Size\n\t\t");
 				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
 				String l = String.join("", option);
-				sb.append("Mmaximum length DHCP message  : " + Tools.convertHextoDec(l)+"\n\t");
+				sb.append("Maximum length DHCP message  : " + Tools.convertHextoDec(l)+"\n\t");
 				
 				break; 
 				
@@ -292,6 +315,12 @@ public class OptionDHCP implements ICouches{
 				sb.append("Rebinding Time Value : (" + Tools.convertHextoDec(v) + " s)\n\t");
 				break;
 			
+			case 60 :
+				sb.append("Option : (60) Vendor class identifier\n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				sb.append("Vendor class identifier : " + Tools.hexToASCII(String.join("", option)) +"\n\t");
+				break;
+			
 			case 61:
 				sb.append("Option : (61) Client Identifier\n\t\t");
 				int len = Tools.convertHextoDec(length);
@@ -306,13 +335,29 @@ public class OptionDHCP implements ICouches{
 				// fonction hardware type a faire
 				
 				break;
-			
+			case 66 :
+				sb.append("Option : (66) TFTP server Name  \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				
+				
+				sb.append("TFTP server  Name : " + Tools.hexToASCII(String.join("", option)) + "\n\t" );
+				
+				break;
+				
+			case 67: 
+				sb.append("Option : (67) Bootfile Name  \n\t\t");
+				sb.append("Length : " +  Tools.convertHextoDec(length)+"\n\t\t");
+				
+				
+				sb.append("Bootfile Name : " + Tools.hexToASCII(String.join("", option)) + "\n\t" );
+				
+				break;
 			case 255:
 				sb.append("Option (255) End \n\t\t Option End : 255"+"\n\t");
 				break;
 			default :
-				sb.append("unable analyse option : " +  Tools.convertHextoDec(tag)+"\n\t");
-				sb.append("Length : " + Tools.convertHextoDec(length) + "\n\t\t");
+				sb.append("Not Treated Option : " +  Tools.convertHextoDec(tag)+"\n\t");
+				sb.append("Length : " + Tools.convertHextoDec(length) + "\n\t");
 		}
 		
 		return sb.toString();
