@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-11-openjdk-amd64">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/zulu-fx-17-amd64">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx.web.jar"/>
-	<classpathentry kind="lib" path="/home/nightsky/eclipse-workspace/AnalyseurReseau/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/org.junit_4.13.0.v20200204-1500.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/org.hamcrest.core_1.3.0.v20180420-1519.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.web.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="/home/kirito/eclipse-workspace/AnalyseurReseau/lib/javafx.base.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

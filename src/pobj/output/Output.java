@@ -13,7 +13,7 @@ public class Output {
 			FileWriter fw = new FileWriter(file);
 			
 			PrintWriter pw = new PrintWriter(fw, false);
-			System.out.println(res);
+			//System.out.println(res);
 			pw.write(res);
 			
 			pw.close();
