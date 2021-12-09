@@ -53,7 +53,7 @@ public class Dns implements ICouches {
 		additionnal = new ArrayList<>();
 		
 		for(int j = 0 ; j < Tools.convertHextoDec(numberOfQuestions) ; j++) {
-			DnsQuestion q = new DnsQuestion(enteteDNS.subList(i, enteteDNS.size()));
+			DnsQuestion q = new DnsQuestion(enteteDNS.subList(i, enteteDNS.size()), enteteDNS);
 			questions.add(q);
 			i += q.getLength();
 		}
@@ -242,10 +242,15 @@ public class Dns implements ICouches {
 		return sb.toString();
 	}
 	
-	public static String domainNameRead(List<String> name)  {
+	public  String domainNameRead(List<String> name)  {
 		List<String> list = new ArrayList<>();
 		int i = 0;
 		while(Tools.convertHextoDec(name.get(i)) != 0 && i < name.size()) {
+			
+			
+			
+			
+			
 			int tmpLen = Tools.convertHextoDec(name.get(i++));
 			
 			

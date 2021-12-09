@@ -113,9 +113,30 @@ public class Ip implements ICouches {
 			}
 			break;
 		
-
-		default:
+		case 131:
 			
+
+			optionLength = enteteIP.get(i++);
+			optionPointer = enteteIP.get(i++);
+			int  len = Tools.convertHextoDec(optionLength);
+			while(i< 20 +len) {
+				String ipPasser =  Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++));
+				listeIPpasser.add(ipPasser);
+			}
+			
+			break;
+		case 137 :
+			optionLength = enteteIP.get(i++);
+			optionPointer = enteteIP.get(i++);
+			int  len1 = Tools.convertHextoDec(optionLength);
+			while(i< 20 +len1) {
+				String ipPasser =  Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++));
+				listeIPpasser.add(ipPasser);
+			}
+			
+			break;
+		default:
+			optionLength = "type non traite";
 			break;
 		}
 		
@@ -159,18 +180,31 @@ public class Ip implements ICouches {
 						break;
 					case 68 :
 						sb.append("Time Stamp (68)\n\t");
+						sb.append("option not analysed (non mentionner en cours)\n\t");
 						//Time Stamp
 						break;
 					case 131 :
 						sb.append("Loose Routing (131)\n\t");
+						sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
+						sb.append("Option Pointeur : "+optionPointer+"\n\t");
+						for(String s:listeIPpasser) {
+							sb.append("\t"+s+"\n\t");
+						}
+						
 						//Loose Routing
 						break;
 					case 137 :
 						sb.append("Strict Routing (137)\n\t");
 						//Strict Routing
+						
+						sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
+						sb.append("Option Pointeur : "+optionPointer+"\n\t");
+						for(String s:listeIPpasser) {
+							sb.append("\t"+s+"\n\t");
+						}
 						break;
 					default:
-						sb.append("unable to analyse option type");
+						sb.append("unable to analyse option type, option not analysed (non mentionner en cours) \n\t");
 				}
 				
 				sb.append("Padding : "+padding+"\n");

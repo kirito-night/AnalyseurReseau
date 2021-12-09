@@ -47,7 +47,7 @@ public class DnsRR implements ICouches {
 		if(Tools.convertHextoDec(name) ==0 ) {
 			ptrName = "<Root>";
 		}else {
-			ptrName = findName();
+			ptrName = findName(trame);
 		}
 		
 	}
@@ -97,20 +97,25 @@ public class DnsRR implements ICouches {
 				break ;
 			case 3:
 				//Cname
-				sb.append("Cannonical Name: " + Dns.domainNameRead(rdata)+"\n\t");
+				/*int ptrCname = 0;
+				while (ptrCname  < rdata.size()) {
+					sb.append("Cannonical Name : " + this.findName(rdata)+"\n\t");
+				}*/
+				
+				sb.append("Cannonical Name : " + this.findName(rdata)+"\n\t");
 				break;
 			case 4  :
 				//mail Exchange
 				int pref = Tools.convertHextoDec(rdata.get(0)+rdata.get(1));
-				sb.append(" Mail Exchange , Preferences : "+ pref+" Exchange :" + Dns.domainNameRead(rdata.subList(2, rdata.size()))+"\n\t");
+				sb.append(" Mail Exchange , Preferences : "+ pref+" Exchange :" +this.findName(rdata.subList(2, rdata.size()))+"\n\t");
 				break;
 			case 5 : 
 				//authoritative name server
-				sb.append("Authoritative Name Server : " + Dns.domainNameRead(rdata)+"\n\t");
+				sb.append("Authoritative Name Server : " + this.findName(rdata)+"\n\t");
 				break;
 			case 6 : 
 				int i = 0;
-				//String pNameServer = Dns.domainNameRead(rdata);
+				
 				
 				String pNameServer = findName(rdata);
 				
@@ -130,7 +135,7 @@ public class DnsRR implements ICouches {
 					break;
 				}
 				
-				//String aMailBox = Dns.domainNameRead(rdata.subList(i, rdata.size()));
+				
 				String aMailBox = findName(rdata);
 				while(Tools.convertHextoDec(rdata.get(i)) != 0 && Tools.convertBintoDec( Tools.convertHextoBin(rdata.get(i)).substring(0, 2)) != Tools.convertBintoDec("11")  && i < rdata.size()) {
 					i++;
@@ -186,7 +191,7 @@ public class DnsRR implements ICouches {
 		
 		String offset  =binName.substring(2,binName.length());
 		int ptr = Tools.convertBintoDec(offset);
-		return Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+		return this.findName(enteteDns.subList(ptr, enteteDns.size()));
 		
 		
 		
@@ -194,19 +199,7 @@ public class DnsRR implements ICouches {
 	}
 	
 	public String findName(List<String> name) {
-		/*int i = 0;
-		String tmpLen = rdata.get(i);
-		String binTmp = Tools.convertHextoBin(tmpLen);
-		String pref = binTmp.substring(0,2);
 		
-		if(Tools.convertBintoDec(pref) == Tools.convertBintoDec("11")) {
-			i++;
-			binTmp += Tools.convertHextoBin(rdata.get(i));
-			String off =  binTmp.substring(2,binTmp.length()) ;
-			int ptr = Tools.convertHextoDec(off);
-			String ptrRead =  Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
-		}
-		return Dns.domainNameRead(rdata);*/
 		
 		
 		List<String> list = new ArrayList<>();
@@ -221,7 +214,7 @@ public class DnsRR implements ICouches {
 				binTmp = Tools.convertHextoBin(tmp);
 				String off =  binTmp.substring(2,binTmp.length()) ;
 				int ptr = Tools.convertBintoDec(off);
-				String pointedName = Dns.domainNameRead(enteteDns.subList(ptr, enteteDns.size()));
+				String pointedName = this.findName(enteteDns.subList(ptr, enteteDns.size()));
 				list.add(pointedName);
 				break;
 			}
