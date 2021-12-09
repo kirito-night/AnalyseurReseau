@@ -95,14 +95,32 @@ public class Ip implements ICouches {
 	private void optionIP(){
 		int i = 20;
 		optionType = enteteIP.get(i++);
-		optionLength = enteteIP.get(i++);
-		optionPointer = enteteIP.get(i++);
-		int  length = Tools.convertHextoDec(optionLength);
+		
 		listeIPpasser = new ArrayList<>();
-		while(i< 20 +length) {
-			String ipPasser =  Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++));
-			listeIPpasser.add(ipPasser);
+		
+		switch (Tools.convertHextoDec(optionType)) {
+		case 0 : 
+			optionLength= "no option length";
+		
+		case 7:
+			
+			optionLength = enteteIP.get(i++);
+			optionPointer = enteteIP.get(i++);
+			int  length = Tools.convertHextoDec(optionLength);
+			while(i< 20 +length) {
+				String ipPasser =  Tools.convertHextoDec( enteteIP.get(i++)) + "." +Tools.convertHextoDec( enteteIP.get(i++))  + "." + Tools.convertHextoDec( enteteIP.get(i++)) + "." + Tools.convertHextoDec( enteteIP.get(i++));
+				listeIPpasser.add(ipPasser);
+			}
+			break;
+		
+
+		default:
+			
+			break;
 		}
+		
+		
+		
 		padding = enteteIP.get(i++);
 		for(; i< 60 ; i++) {
 			padding = padding +" "+ enteteIP.get(i);
@@ -132,6 +150,12 @@ public class Ip implements ICouches {
 					case 7 :
 						sb.append("Recourd Route (7)\n\t");
 						//recourd route
+						
+						sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
+						sb.append("Option Pointeur : "+optionPointer+"\n\t");
+						for(String s:listeIPpasser) {
+							sb.append("\t"+s+"\n\t");
+						}
 						break;
 					case 68 :
 						sb.append("Time Stamp (68)\n\t");
@@ -148,11 +172,7 @@ public class Ip implements ICouches {
 					default:
 						sb.append("unable to analyse option type");
 				}
-				sb.append("Option Length : "+Tools.convertHextoDec(optionLength)+ "\n\t");
-				sb.append("Option Pointeur : "+optionPointer+"\n\t");
-				for(String s:listeIPpasser) {
-					sb.append("\t"+s+"\n\t");
-				}
+				
 				sb.append("Padding : "+padding+"\n");
 			
 		}
