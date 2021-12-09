@@ -19,6 +19,7 @@ public class Analyse extends Application{
         stage.setTitle("Network Packet Analyser");
         stage.setScene(scene);
         stage.show();
+        
     }
 	
 	public static void main(String[] args) {
